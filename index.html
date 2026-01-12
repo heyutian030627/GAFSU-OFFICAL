@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>全球外国语大学联盟 - GAFSU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+
+    <script>
+        // 为GAFSU GALLERY按钮添加点击波纹效果
+        document.addEventListener('DOMContentLoaded', function() {
+            const galleryButtons = document.querySelectorAll('.gallery-button');
+            
+            galleryButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // 阻止默认跳转
+                    e.preventDefault();
+                    
+                    // 获取按钮的href属性
+                    const href = this.getAttribute('href');
+                    
+                    // 创建波纹元素
+                    const ripple = document.createElement('span');
+                    
+                    // 获取点击位置
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    // 设置波纹样式
+                    ripple.style.cssText = `
+                        position: absolute;
+                        border-radius: 50%;
+                        background: rgba(255, 255, 255, 0.6);
+                        transform: scale(0);
+                        animation: ripple 0.6s linear;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        pointer-events: none;
+                        z-index: 10;
+                    `;
+                    
+                    // 添加波纹到按钮
+                    this.appendChild(ripple);
+                    
+                    // 移除波纹并跳转
+                    setTimeout(() => {
+                        ripple.remove();
+                        window.location.href = href;
+                    }, 600);
+                });
+            });
+        });
+        
+        // 添加CSS动画
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            @keyframes pulse-slow {
+                0%, 100% {
+                    opacity: 0%;
+                }
+                50% {
+                    opacity: 35%;
+                }
+            }
+            
+            .pulse-slow {
+                animation: pulse-slow 5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            
+            /* Carousel Styles */
+            .carousel-container {
+                max-width: 100%;
+            }
+            
+            .carousel-slides {
+                display: flex;
+                width: 100%;
+                height: 0;
+                padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+                overflow: hidden;
+                position: relative;
+            }
+            
+            .carousel-slide {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-color: #f0f0f0;
+            }
+            
+            .carousel-slide img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: opacity 0.7s ease-in-out;
+            }
+            
+            .carousel-slide img.loading {
+                opacity: 0;
+            }
+            
+            .carousel-slide img.loaded {
+                opacity: 1;
+            }
+            
+            /* Indicators */
+            .carousel-indicator {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                background-color: rgba(255, 255, 255, 0.5);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                border: 2px solid transparent;
+            }
+            
+            .carousel-indicator.active {
+                background-color: white;
+                width: 32px;
+                border-radius: 6px;
+            }
+            
+            /* Responsive Adjustments */
+            @media (max-width: 768px) {
+                .carousel-btn {
+                    padding: 2px;
+                }
+                
+                .carousel-btn i {
+                    font-size: 1.25rem;
+                }
+                
+                .carousel-counter {
+                    font-size: 0.875rem;
+                    padding: 2px 6px;
+                    top: 2px;
+                    right: 2px;
+                }
+                
+                .carousel-indicators {
+                    bottom: 2px;
+                }
+                
+                .carousel-indicator {
+                    width: 8px;
+                    height: 8px;
+                }
+                
+                .carousel-indicator.active {
+                    width: 24px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Image Carousel Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            // 图片列表（从pic/meeting文件夹获取）
+            const images = [
+                'pic/meeting/1.jpg',
+                'pic/meeting/2.jpg',
+                'pic/meeting/3.jpg',
+                'pic/meeting/4.jpg',
+                'pic/meeting/5.jpg'
+            ];
+            
+            const carouselSlides = document.getElementById('carouselSlides');
+            const prevBtn = document.querySelector('.prev-btn');
+            const nextBtn = document.querySelector('.next-btn');
+            const indicatorsContainer = document.querySelector('.carousel-indicators');
+            const currentSlideEl = document.getElementById('currentSlide');
+            const totalSlidesEl = document.getElementById('totalSlides');
+            const loadingEl = document.querySelector('.carousel-loading');
+            
+            let currentIndex = 0;
+            let isAutoPlaying = true;
+            let autoPlayInterval;
+            const slideInterval = 3000; // 3秒自动切换
+            
+            // 预加载图片
+            const preloadImages = async () => {
+                const promises = images.map(imgSrc => {
+                    return new Promise((resolve, reject) => {
+                        const img = new Image();
+                        img.src = imgSrc;
+                        img.onload = () => resolve(imgSrc);
+                        img.onerror = () => reject(imgSrc);
+                    });
+                });
+                
+                try {
+                    await Promise.all(promises);
+                    console.log('All images preloaded successfully');
+                } catch (failedImg) {
+                    console.warn(`Image failed to load: ${failedImg}`);
+                }
+                
+                // 隐藏加载动画
+                loadingEl.style.display = 'none';
+            };
+            
+            // 初始化轮播
+            const initCarousel = () => {
+                // 设置总幻灯片数
+                totalSlidesEl.textContent = images.length;
+                
+                // 创建幻灯片
+                images.forEach((imgSrc, index) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'carousel-slide';
+                    
+                    const img = document.createElement('img');
+                    img.src = imgSrc;
+                    img.alt = `会议图片 ${index + 1}`;
+                    img.className = 'loading';
+                    
+                    // 图片加载完成后显示
+                    img.onload = () => {
+                        img.classList.remove('loading');
+                        img.classList.add('loaded');
+                    };
+                    
+                    // 图片加载失败时显示占位符
+                    img.onerror = () => {
+                        img.src = 'https://via.placeholder.com/800x450?text=Image+Failed+to+Load';
+                        img.classList.remove('loading');
+                        img.classList.add('loaded');
+                    };
+                    
+                    slide.appendChild(img);
+                    carouselSlides.appendChild(slide);
+                    
+                    // 创建指示器
+                    const indicator = document.createElement('div');
+                    indicator.className = `carousel-indicator ${index === 0 ? 'active' : ''}`;
+                    indicator.addEventListener('click', () => goToSlide(index));
+                    indicatorsContainer.appendChild(indicator);
+                });
+                
+                // 初始化自动播放
+                startAutoPlay();
+            };
+            
+            // 切换到指定幻灯片
+            const goToSlide = (index) => {
+                // 确保索引在有效范围内
+                if (index < 0) {
+                    index = images.length - 1;
+                } else if (index >= images.length) {
+                    index = 0;
+                }
+                
+                currentIndex = index;
+                
+                // 获取所有幻灯片
+                const slides = document.querySelectorAll('.carousel-slide');
+                
+                // 显示当前幻灯片，隐藏其他幻灯片
+                slides.forEach((slide, i) => {
+                    if (i === currentIndex) {
+                        slide.style.display = 'flex';
+                    } else {
+                        slide.style.display = 'none';
+                    }
+                });
+                
+                // 更新当前幻灯片计数
+                currentSlideEl.textContent = currentIndex + 1;
+                
+                // 更新指示器
+                document.querySelectorAll('.carousel-indicator').forEach((indicator, i) => {
+                    indicator.classList.toggle('active', i === currentIndex);
+                });
+            };
+            
+            // 下一张幻灯片
+            const nextSlide = () => {
+                goToSlide(currentIndex + 1);
+            };
+            
+            // 上一张幻灯片
+            const prevSlide = () => {
+                goToSlide(currentIndex - 1);
+            };
+            
+            // 开始自动播放
+            const startAutoPlay = () => {
+                autoPlayInterval = setInterval(nextSlide, slideInterval);
+            };
+            
+            // 停止自动播放
+            const stopAutoPlay = () => {
+                clearInterval(autoPlayInterval);
+            };
+            
+            // 事件监听
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoPlay();
+                isAutoPlaying = false;
+            });
+            
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoPlay();
+                isAutoPlaying = false;
+            });
+            
+            // 鼠标悬停时停止自动播放，离开时恢复
+            const carouselContainer = document.querySelector('.carousel-container');
+            carouselContainer.addEventListener('mouseenter', () => {
+                if (isAutoPlaying) {
+                    stopAutoPlay();
+                }
+            });
+            
+            carouselContainer.addEventListener('mouseleave', () => {
+                if (isAutoPlaying) {
+                    startAutoPlay();
+                }
+            });
+            
+            // 初始化
+            preloadImages().then(() => {
+                initCarousel();
+            });
+        });
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 20px rgba(0, 0, 0, 0.15);
+        }
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 导航栏优化 */
+        nav {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        /* 桌面状态下固定导航栏高度 */
+        @media (min-width: 768px) {
+            nav {
+                height: 4rem;
+                min-height: 4rem;
+                max-height: 4rem;
+            }
+        }
+        
+        /* 统一导航栏链接样式 */
+        .nav-link {
+            @apply text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative;
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            transition: width 0.3s ease-in-out;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .nav-link.active {
+            @apply text-blue-400;
+        }
+
+        .nav-link.active::after {
+            width: 100%;
+        }
+
+        /* 移动导航链接样式 */
+        .mobile-nav-link {
+            @apply block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-blue-600/20 transition-all duration-300;
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.025em;
+            text-decoration: none;
+            line-height: 1.5;
+        }
+
+        .mobile-nav-link.active {
+            @apply bg-blue-600/20 text-blue-400;
+        }
+        
+        /* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 shadow-lg relative">
+        <!-- Tech Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none z-0">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_80%,rgba(102,126,234,0.15)_0%,transparent_50%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_0%,rgba(102,126,234,0.05)_50%,transparent_100%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <!-- Animated Grid Lines -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg_width="100"_height="100"_viewBox="0_0_100_100"_xmlns="http://www.w3.org/2000/svg"%3E%3Cpath_d="M11_18c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm48_25c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm-43-7c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm63_31c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM34_90c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm56-76c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM12_86c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm28-65c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm23-11c2.76_0_5-2.24_5-5s-2.24-5-5-5-5_2.24-5_5_2.24_5_5_5zm-6 60c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm29 22c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zM32 63c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm57-13c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm-9-21c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM60 91c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM35 41c1.105_0_2-.895_2-2s-.895-2-2-2-2 .895-2 2 .895_2 2 2zM12 60c1.105_0_2-.895_2-2s-.895-2-2-2-2 .895-2 2 .895_2 2 2z"_fill="%23667eea"_fill-opacity="0.08"_fill-rule="evenodd"/%3E%3C/svg%3E') opacity-20"></div>
+        </div>
+        <div class="max-w-none mx-auto px-2 sm:px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center group">
+                        <div class="w-16 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40">
+                            <span class="text-white font-bold text-base tracking-wider">GAFSU</span>
+                        </div>
+                        <span class="ml-2 text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hidden md:inline transition-all duration-300 group-hover:opacity-100">
+                            <span data-lang="zh">全球外国语大学联盟</span>
+                            <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden min-[1838px]:flex items-center space-x-1">
+                    <!-- Search Bar -->
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="搜索..." class="bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 w-48 hover:w-64">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-8">
+                        <!-- Chinese Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="zh">
+                            <a href="index.html" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative group">
+                                首页
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                关于我们
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟成员
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟发展历程
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- 联盟活动下拉菜单 -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative flex items-center">
+                                    联盟活动
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                                </a>
+                                <!-- 下拉菜单内容 -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="zh"></div>
+                        
+                        <!-- English Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="en">
+                            <a href="index.html" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative group">
+                                Home
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                About Us
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Member Universities
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Alliance History
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- Alliance Activities Dropdown -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative flex items-center">
+                                    Alliance Activities
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                                </a>
+                                <!-- Dropdown Menu Content -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="en"></div>
+                        
+                        <!-- Language Switcher -->
+                        <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-blue-500/30">
+                            <button id="langZh" class="lang-btn px-4 py-1.5 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30">中文</button>
+                            <button id="langEn" class="lang-btn px-4 py-1.5 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="min-[1838px]:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-blue-500/30 text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="min-[1838px]:hidden mobile-menu hidden bg-gray-900/95 backdrop-blur-lg border-t border-blue-500/30 transition-all duration-500 relative z-10">
+            <div class="px-2 pt-4 pb-6 space-y-3 sm:px-3">
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <input type="text" placeholder="搜索..." class="w-full bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- Chinese Navigation -->
+                <div data-lang="zh">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500">首页</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">关于我们</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟成员</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟发展历程</a>
+                    
+                    <!-- 联盟活动移动下拉菜单 -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500 flex items-center justify-between">
+                            联盟活动
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- 下拉菜单内容 -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English Navigation -->
+                <div data-lang="en" class="hidden">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500">Home</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">About Us</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Member Universities</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Alliance History</a>
+                    
+                    <!-- Alliance Activities Mobile Dropdown -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500 flex items-center justify-between">
+                            Alliance Activities
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- Dropdown Menu Content -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Language Switcher -->
+                <div class="border-t border-blue-500/30 pt-4 mt-4">
+                    <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 mx-3">
+                        <button id="mobileLangZh" class="lang-btn w-full px-4 py-2 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700">中文</button>
+                        <button id="mobileLangEn" class="lang-btn w-full px-4 py-2 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section - Collapsible -->
+    <section class="hero-gradient text-white" id="heroSection">
+        <div class="container mx-auto px-4 py-20 transition-all duration-500 ease-in-out hero-collapsed" id="heroContent">
+            <!-- Hero Content Layout -->
+            <!-- Collapse/Expand Button (mobile first, shows above logo when expanded) -->
+            <div class="text-center pb-4 md:hidden" id="mobileToggleButton">
+                <button onclick="toggleHero()" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 flex items-center justify-center mx-auto">
+                    <i class="fas fa-chevron-down mr-2" id="mobileToggleIcon"></i>
+                    <span id="mobileToggleText">
+                        <span data-lang="zh">展开</span>
+                        <span data-lang="en" class="hidden">Expand</span>
+                    </span>
+                </button>
+            </div>
+            
+            <!-- Top Row: Logo and Main Title -->
+            <div class="flex flex-col md:flex-row items-center md:items-start mb-6">
+                <!-- GAFSU Logo -->
+                <!-- GAFSU Logo with pseudo-element mask box -->
+                <div class="relative w-72 h-auto mb-6 md:mb-0 md:w-54">
+                    <!-- Logo image -->
+                    <img 
+                        src="pic/GAFSU.jpg" 
+                        alt="GAFSU Logo" 
+                        class="w-full h-auto fade-in rounded-3xl"
+                    >
+                    <!-- Use ::after pseudo-element for mask box to avoid white line -->
+                    <style>
+                        .relative.w-72::after,
+                        .relative.md\:w-54::after {
+                            content: '';
+                            position: absolute;
+                            top: 0;
+                            left: 50%;
+                            transform: translateX(-50%);
+                            width: 8rem;
+                            height: 100%;
+                            border-radius: 1.5rem;
+                            border: 2px solid transparent;
+                            pointer-events: none;
+                            background: transparent;
+                            overflow: hidden;
+                        }
+                    </style>
+                </div>
+                
+                <!-- Main Title -->
+                <h1 class="text-8xl md:text-10xl font-bold fade-in ml-0 md:ml-3 flex-1">
+                    <span data-lang="zh">全球外国语大学联盟</span>
+                    <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                </h1>
+            </div>
+            
+            <!-- Bottom Row: Other Content -->
+            <div class="flex-1">
+                <!-- Description -->
+                <div class="max-w-4xl opacity-90">
+                    <!-- Chinese Content -->
+                    <div data-lang="zh" class="fade-in" style="animation-delay: 0.4s;">
+                        <p class="text-lg md:text-xl mb-6">促进全球外国语大学之间的交流与合作，推动语言教育和跨文化研究的发展</p>
+                        <p class="text-lg md:text-xl mb-8">自成立以来，联盟通过举办学术研讨会、学生交流项目、教师互访等活动，加强了成员大学之间的联系，为培养具有全球视野和跨文化沟通能力的人才做出了积极贡献。</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                            <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-xl border-2 border-white">
+                                <div class="text-3xl mb-3">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">全球视野</h3>
+                                <p>连接世界各国顶尖外国语大学，促进全球教育合作</p>
+                            </div>
+                            <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-xl border-2 border-white">
+                                <div class="text-3xl mb-3">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">语言教育</h3>
+                                <p>推动语言教学创新，提高语言学习质量</p>
+                            </div>
+                            <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-xl border-2 border-white">
+                                <div class="text-3xl mb-3">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">跨文化交流</h3>
+                                <p>促进不同文化之间的理解与尊重</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- English Content -->
+                    <div data-lang="en" class="fade-in hidden" style="animation-delay: 0.4s;">
+                        <p class="text-lg md:text-xl mb-6">The Global Alliance of Foreign Studies Universities (GAFSU) is an international academic alliance composed of top foreign studies universities from around the world. The alliance is dedicated to promoting exchanges and cooperation among member universities, and advancing language education, cross-cultural research, and international understanding.</p>
+                        <p class="text-lg md:text-xl mb-8">Since its establishment, the alliance has strengthened connections among member universities through academic seminars, student exchange programs, faculty visits, and other activities, making positive contributions to cultivating talents with global perspectives and cross-cultural communication skills.</p>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+                            <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-xl border-2 border-white">
+                                <div class="text-3xl mb-3">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Global Vision</h3>
+                                <p>Connect top foreign studies universities worldwide, promote global educational cooperation</p>
+                            </div>
+                            <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-xl border-2 border-white">
+                                <div class="text-3xl mb-3">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Language Education</h3>
+                                <p>Promote language teaching innovation, enhance language learning quality</p>
+                            </div>
+                            <div class="bg-white bg-opacity-10 backdrop-blur-sm p-6 rounded-xl border-2 border-white">
+                                <div class="text-3xl mb-3">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <h3 class="text-xl font-semibold mb-2">Cross-Cultural Exchange</h3>
+                                <p>Promote understanding and respect among different cultures</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Collapse/Expand Button -->
+        <div class="text-center pb-4">
+            <button onclick="toggleHero()" class="bg-white bg-opacity-20 hover:bg-opacity-30 text-white px-6 py-2 rounded-full font-medium transition-all duration-300 flex items-center justify-center mx-auto">
+                <i class="fas fa-chevron-down mr-2" id="toggleIcon"></i>
+                <span id="toggleText">
+                    <span data-lang="zh">展开</span>
+                    <span data-lang="en" class="hidden">Expand</span>
+                </span>
+            </button>
+        </div>
+    </section>
+    <style>
+        /* Collapsible Hero Styles - Simple and effective */
+        .hero-collapsed {
+            padding: 2rem 0 !important;
+            max-height: 160px !important;
+            overflow: hidden !important;
+        }
+        /* Simplified flex container for collapsed state */
+        .hero-collapsed .flex {
+            display: block !important;
+            text-align: center !important;
+        }
+        /* Hide logo in collapsed state to ensure perfect alignment */
+        .hero-collapsed .relative.w-72 {
+            display: none !important;
+        }
+        /* Title style in collapsed state - perfectly aligned with expand button */
+        .hero-collapsed h1 {
+            font-size: 4rem !important;
+            margin-bottom: 0 !important;
+            text-align: center !important;
+            display: inline-block !important;
+        }
+        
+        /* Mobile responsive styles for collapsed hero */
+        @media (max-width: 768px) {
+            .hero-collapsed h1 {
+                font-size: 2rem !important;
+                font-weight: 700;
+                white-space: normal;
+                line-height: 1.2;
+            }
+            
+            /* Mobile responsive styles for expanded hero */
+            #heroContent:not(.hero-collapsed) h1 {
+                font-size: 2.5rem !important;
+                white-space: nowrap;
+                text-align: center;
+                width: 100%;
+            }
+        }
+        
+        /* 英文状态下hero区标题缩小 */
+        h1 [data-lang="en"] {
+            font-size: 0.6em !important;
+        }
+        
+        /* 英雄区展开状态下logo与英文标题中心线对齐 */
+        @media (min-width: 768px) {
+            /* 对所有展开状态的hero区生效 */
+            #heroContent:not(.hero-collapsed) > div:first-child {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+            }
+            
+            /* 调整logo容器 */
+            #heroContent:not(.hero-collapsed) > div:first-child > div:first-child {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            
+            /* 确保logo图片垂直居中 */
+            #heroContent:not(.hero-collapsed) > div:first-child > div:first-child img {
+                align-self: center;
+            }
+            
+            /* 调整标题容器 */
+            #heroContent:not(.hero-collapsed) h1 {
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                flex: 1;
+                line-height: 1.2;
+            }
+            
+            /* 确保英文标题块级显示，便于多行文本垂直居中 - 仅当未隐藏时生效 */
+            h1 [data-lang="en"]:not(.hidden) {
+                display: block;
+                align-self: center;
+                line-height: 1.2;
+            }
+        }
+        
+        /* 确保在桌面端始终隐藏上方的收起键 */
+        @media (min-width: 768px) {
+            #mobileToggleButton {
+                display: none !important;
+            }
+        }
+        
+        /* 移动端收起按钮样式控制 */
+        @media (max-width: 767px) {
+            /* 默认隐藏移动端收起按钮 */
+            #mobileToggleButton {
+                display: none;
+            }
+            
+            /* 当hero区展开时，显示移动端收起按钮 */
+            #heroContent:not(.hero-collapsed) #mobileToggleButton {
+                display: block;
+            }
+            
+            /* 当hero区展开时，隐藏底部的展开/收起按钮 */
+            #heroContent:not(.hero-collapsed) ~ div {
+                display: none;
+            }
+        }
+        
+        .hero-collapsed p,
+        .hero-collapsed .grid,
+        .hero-collapsed a {
+            display: none !important;
+        }
+        
+        /* 移动模式下GAFSU星元画廊按钮样式修复 */
+        @media (max-width: 767px) {
+            .gallery-button {
+                /* 调整为全屏宽度 */
+                width: 100% !important;
+                /* 减小字体大小 */
+                font-size: 1.5rem !important;
+                /* 减小内边距 */
+                padding: 2rem 1rem !important;
+                /* 允许文本换行 */
+                white-space: normal !important;
+            }
+            
+            .gallery-button span span {
+                /* 减小按钮内文本大小 */
+                font-size: 1.5rem !important;
+            }
+            
+            .gallery-button i {
+                /* 减小图标大小 */
+                font-size: 2rem !important;
+            }
+            
+            /* 调整按钮内容间距 */
+            .gallery-button span.relative {
+                gap: 1rem !important;
+            }
+            
+            /* 调整按钮容器 */
+            .flex.justify-center.mt-24.mb-24 {
+                margin-top: 4rem !important;
+                margin-bottom: 4rem !important;
+            }
+        }
+    </style>
+    
+    <script>
+        // 移动下拉菜单交互
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为所有移动下拉菜单添加点击事件
+            const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+            
+            mobileDropdownToggles.forEach(toggle => {
+                toggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    // 切换父容器的active类
+                    const dropdown = this.closest('.mobile-dropdown');
+                    const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                    const icon = this.querySelector('i');
+                    
+                    // 切换菜单显示/隐藏
+                    menu.classList.toggle('hidden');
+                    dropdown.classList.toggle('active');
+                    
+                    // 切换图标旋转
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        });
+    </script>
+
+
+    <!-- Member Universities Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <!-- Image Carousel -->
+                <div class="carousel-container relative max-w-7xl mx-auto my-18 overflow-hidden rounded-3xl shadow-3xl">
+                    <!-- Carousel Slides -->
+                    <div class="carousel-slides flex transition-transform duration-700 ease-in-out" id="carouselSlides">
+                        <!-- Slides will be dynamically populated by JavaScript -->
+                    </div>
+                    
+                    <!-- Navigation Buttons -->
+                    <button class="carousel-btn prev-btn absolute top-1/2 left-4 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-300 z-10 focus:outline-none focus:ring-2 focus:ring-white">
+                        <i class="fas fa-chevron-left text-2xl"></i>
+                    </button>
+                    <button class="carousel-btn next-btn absolute top-1/2 right-4 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition-all duration-300 z-10 focus:outline-none focus:ring-2 focus:ring-white">
+                        <i class="fas fa-chevron-right text-2xl"></i>
+                    </button>
+                    
+                    <!-- Indicators -->
+                    <div class="carousel-indicators absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-10"></div>
+                    
+                    <!-- Image Counter -->
+                    <div class="carousel-counter absolute top-4 right-4 bg-black bg-opacity-50 text-white px-4 py-2 rounded-lg text-lg font-medium">
+                        <span id="currentSlide">1</span> / <span id="totalSlides">0</span>
+                    </div>
+                    
+                    <!-- Loading State -->
+                    <div class="carousel-loading absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center z-20">
+                        <div class="w-20 h-20 border-4 border-white border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                </div>
+
+                <!-- GAFSU GALLERY Button -->
+                <div class="flex justify-center mt-24 mb-24">
+                    <div data-lang="zh" class="flex flex-wrap gap-4 justify-center fade-in max-w-7xl w-full">
+                        <a href="https://heyutian030627.github.io/GAFSU-Star-Gallery/" class="gallery-button group relative bg-gradient-to-r from-indigo-600 to-purple-600 text-white w-full px-6 py-16 rounded-3xl font-semibold text-4xl transition-all duration-350 transform hover:scale-107 active:scale-98 focus:outline-none focus:ring-3 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-transparent shadow-2xl hover:shadow-3xl hover:shadow-indigo-500/30 active:shadow-xl overflow-hidden whitespace-nowrap">
+                            <!-- 点击波纹效果容器 -->
+                            <span class="absolute inset-0 overflow-hidden pointer-events-none"></span>
+                            <!-- 发光边框效果 -->
+                            <span class="absolute inset-0 rounded-3xl border-4 border-transparent transition-all duration-350 group-hover:border-white group-hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"></span>
+                            <!-- 脉冲动画效果 -->
+                            <span class="absolute inset-0 rounded-3xl bg-white opacity-0 transition-opacity duration-1500 group-hover:opacity-35 animate-[pulse-slow_5s_cubic-bezier(0.4,0,0.6,1)_infinite]"></span>
+                            <!-- 鼠标跟随效果容器 -->
+                            <span class="absolute -inset-3 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-3xl opacity-0 blur transition duration-600 group-hover:opacity-40 group-hover:blur-md"></span>
+                            <!-- 渐变背景动态效果 -->
+                            <span class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 transition-opacity duration-350 group-hover:opacity-100"></span>
+                            <!-- 按钮内容 -->
+                            <span class="relative flex items-center justify-center gap-8">
+                                <i class="fas fa-images text-5xl transition-transform duration-350 group-hover:scale-130 group-hover:rotate-12"></i>
+                                <span class="transition-transform duration-350 group-hover:translate-x-2">GAFSU星元画廊</span>
+                                <i class="fas fa-arrow-right text-2xl transition-all duration-350 opacity-0 group-hover:opacity-100 group-hover:translate-x-3"></i>
+                            </span>
+                        </a>
+                    </div>
+                    <div data-lang="en" class="flex flex-wrap gap-4 justify-center fade-in hidden max-w-7xl w-full">
+                        <a href="https://heyutian030627.github.io/GAFSU-Star-Gallery/" class="gallery-button group relative bg-gradient-to-r from-indigo-600 to-purple-600 text-white w-full px-6 py-16 rounded-3xl font-semibold text-4xl transition-all duration-350 transform hover:scale-107 active:scale-98 focus:outline-none focus:ring-3 focus:ring-indigo-400 focus:ring-offset-2 focus:ring-offset-transparent shadow-2xl hover:shadow-3xl hover:shadow-indigo-500/30 active:shadow-xl overflow-hidden whitespace-nowrap">
+                            <!-- 点击波纹效果容器 -->
+                            <span class="absolute inset-0 overflow-hidden pointer-events-none"></span>
+                            <!-- 发光边框效果 -->
+                            <span class="absolute inset-0 rounded-3xl border-4 border-transparent transition-all duration-350 group-hover:border-white group-hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]"></span>
+                            <!-- 脉冲动画效果 -->
+                            <span class="absolute inset-0 rounded-3xl bg-white opacity-0 transition-opacity duration-1500 group-hover:opacity-35 animate-[pulse-slow_5s_cubic-bezier(0.4,0,0.6,1)_infinite]"></span>
+                            <!-- 鼠标跟随效果容器 -->
+                            <span class="absolute -inset-3 bg-gradient-to-r from-indigo-400 to-purple-400 rounded-3xl opacity-0 blur transition duration-600 group-hover:opacity-40 group-hover:blur-md"></span>
+                            <!-- 渐变背景动态效果 -->
+                            <span class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 transition-opacity duration-350 group-hover:opacity-100"></span>
+                            <!-- 按钮内容 -->
+                            <span class="relative flex items-center justify-center gap-8">
+                                <i class="fas fa-images text-5xl transition-transform duration-350 group-hover:scale-130 group-hover:rotate-12"></i>
+                                <span class="transition-transform duration-350 group-hover:translate-x-2">GAFSU GALLERY</span>
+                                <i class="fas fa-arrow-right text-2xl transition-all duration-350 opacity-0 group-hover:opacity-100 group-hover:translate-x-3"></i>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="inline-block mx-auto mb-6">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                        <span data-lang="zh">联盟成员</span>
+                        <span data-lang="en" class="hidden">Member Universities</span>
+                    </h2>
+                    <div class="h-1 bg-indigo-600" style="width: 100%"></div>
+                </div>
+                
+                <p class="text-gray-600 mt-4">
+                    <span data-lang="zh">来自全球各地的顶尖外国语大学</span>
+                    <span data-lang="en" class="hidden">Top foreign studies universities from around the world</span>
+                </p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Member Card 1 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                        <img src="pic/university_images/1.jpg" alt="北京外国语大学" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <span data-lang="zh">北京外国语大学</span>
+                        <span data-lang="en" class="hidden">Beijing Foreign Studies University</span>
+                    </h3>
+                    <p class="text-gray-500 text-sm mb-4">China</p>
+                    <a href="BFSU.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        <span data-lang="zh">了解更多</span>
+                        <span data-lang="en" class="hidden">Learn More</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Member Card 2 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                        <img src="pic/university_images/2.jpg" alt="上海外国语大学" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <span data-lang="zh">上海外国语大学</span>
+                        <span data-lang="en" class="hidden">Shanghai International Studies University</span>
+                    </h3>
+                    <p class="text-gray-500 text-sm mb-4">China</p>
+                    <a href="SISU.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        <span data-lang="zh">了解更多</span>
+                        <span data-lang="en" class="hidden">Learn More</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Member Card 3 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                        <img src="pic/university_images/3.jpg" alt="东京外国语大学" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <span data-lang="zh">东京外国语大学</span>
+                        <span data-lang="en" class="hidden">Tokyo University of Foreign Studies</span>
+                    </h3>
+                    <p class="text-gray-500 text-sm mb-4">Japan</p>
+                    <a href="TUFS.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        <span data-lang="zh">了解更多</span>
+                        <span data-lang="en" class="hidden">Learn More</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+                <!-- Member Card 4 -->
+                <div class="bg-white rounded-xl shadow-md p-6 card-hover">
+                    <div class="h-32 bg-gray-200 rounded-lg mb-4 overflow-hidden">
+                        <img src="pic/university_images/4.jpg" alt="韩国外国语大学" class="w-full h-full object-cover">
+                    </div>
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">
+                        <span data-lang="zh">韩国外国语大学</span>
+                        <span data-lang="en" class="hidden">Hankuk University of Foreign Studies</span>
+                    </h3>
+                    <p class="text-gray-500 text-sm mb-4">South Korea</p>
+                    <a href="HUFS.html" class="text-indigo-600 hover:text-indigo-800 font-medium flex items-center">
+                        <span data-lang="zh">了解更多</span>
+                        <span data-lang="en" class="hidden">Learn More</span>
+                        <i class="fas fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <!-- View All Button -->
+            <div class="text-center mt-12">
+                <a href="联盟成员.html" class="bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-250 transform hover:scale-105 active:scale-98 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-50 shadow-lg hover:shadow-xl hover:shadow-indigo-500/20 active:shadow-sm">
+                    <i class="fas fa-university mr-2"></i>
+                    <span data-lang="zh">查看全部联盟成员</span>
+                    <span data-lang="en" class="hidden">View All Members</span>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-12">
+                <div class="inline-block mx-auto">
+                    <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                        <span data-lang="zh">最新活动</span>
+                        <span data-lang="en" class="hidden">Latest Activities</span>
+                    </h2>
+                    <div class="h-1 bg-indigo-600" style="width: 100%"></div>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-indigo-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-700 p-3 rounded-full mr-4">
+                            <i class="fas fa-calendar-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">
+                                <span data-lang="zh">CCAS共同体</span>
+                                <span data-lang="en" class="hidden">CCAS Consortium</span>
+                            </h3>
+                            <p class="text-gray-500 text-sm">2025-10-20</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        <span data-lang="zh">北外举办全球区域国别学共同体2025年会</span>
+                        <span data-lang="en" class="hidden">CCAS 2025 Annual Conference Held at BFSU</span>
+                    </p>
+                    <a href="ccas9.html" class="text-indigo-600 hover:text-indigo-800 font-medium">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span data-lang="zh">查看详情</span>
+                        <span data-lang="en" class="hidden">Learn More</span>
+                    </a>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-6 border-l-4 border-indigo-600">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-indigo-100 text-indigo-700 p-3 rounded-full mr-4">
+                            <i class="fas fa-users text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-semibold text-gray-800">
+                                <span data-lang="zh">校长论坛</span>
+                                <span data-lang="en" class="hidden">President's Forum</span>
+                            </h3>
+                            <p class="text-gray-500 text-sm">2025-10-24</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">
+                        <span data-lang="zh">第五届全球外国语大学联盟校长论坛在浙江外国语学院举行</span>
+                        <span data-lang="en" class="hidden">The Fifth GAFSU President's Forum was Held at Zhejiang International Studies University</span>
+                    </p>
+                    <a href="presidentforum5.html" class="text-indigo-600 hover:text-indigo-800 font-medium">
+                        <i class="fas fa-info-circle mr-2"></i>
+                        <span data-lang="zh">查看详情</span>
+                        <span data-lang="en" class="hidden">Learn More</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Footer Column 1 -->
+                <div>
+                    <div class="flex items-center mb-4">
+                <div class="relative flex-shrink-0">
+                    <img src="pic/GAFSU.jpg" alt="GAFSU Logo" class="h-16 w-16 object-cover rounded-2xl flex-shrink-0">
+                    <div class="absolute inset-0 rounded-2xl border-2 border-white opacity-70 pointer-events-none"></div>
+                </div>
+                <span class="text-xl font-bold ml-4">
+                    <span data-lang="zh">全球外国语大学联盟</span>
+                    <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                </span>
+            </div>
+                    <p class="text-gray-400 mb-4">
+                        <span data-lang="zh">促进全球外国语大学之间的交流与合作，推动语言教育和跨文化研究的发展。</span>
+                        <span data-lang="en" class="hidden">Promote exchanges and cooperation among foreign studies universities worldwide, and advance language education and cross-cultural research.</span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-facebook-f text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                <!-- Footer Column 2 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">
+                        <span data-lang="zh">快速链接</span>
+                        <span data-lang="en" class="hidden">Quick Links</span>
+                    </h3>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-home mr-2"></i>
+                                <span data-lang="zh">首页</span>
+                                <span data-lang="en" class="hidden">Home</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="发展历程.html" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-history mr-2"></i>
+                                <span data-lang="zh">发展历程</span>
+                                <span data-lang="en" class="hidden">Alliance History</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="联盟成员.html" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-university mr-2"></i>
+                                <span data-lang="zh">联盟成员</span>
+                                <span data-lang="en" class="hidden">Member Universities</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="about us.html" class="text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-info-circle mr-2"></i>
+                                <span data-lang="zh">关于我们</span>
+                                <span data-lang="en" class="hidden">About Us</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Footer Column 3 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">
+                        <span data-lang="zh">联系我们</span>
+                        <span data-lang="en" class="hidden">Contact Us</span>
+                    </h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-map-marker-alt mr-3"></i>
+                            <span>
+                                <span data-lang="zh">北京市海淀区西三环北路2号</span>
+                                <span data-lang="en" class="hidden">No. 2, North Xisanhuan Road, Haidian District, Beijing</span>
+                            </span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-envelope mr-3"></i>
+                            <span>contact@gafsu.org</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fas fa-phone mr-3"></i>
+                            <span>+86-10-88816666</span>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Footer Column 4 -->
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">
+                        <span data-lang="zh">订阅资讯</span>
+                        <span data-lang="en" class="hidden">Subscribe</span>
+                    </h3>
+                    <p class="text-gray-400 mb-4">
+                        <span data-lang="zh">订阅我们的新闻资讯，获取最新活动和动态。</span>
+                        <span data-lang="en" class="hidden">Subscribe to our newsletter for the latest activities and updates.</span>
+                    </p>
+                    <div id="subscriptionMessage" class="hidden bg-green-700 text-white p-3 rounded-lg mb-3 text-center transition-all duration-300 opacity-0">
+                        <span data-lang="zh">已订阅</span>
+                        <span data-lang="en" class="hidden">Subscribed</span>
+                    </div>
+                    <form id="subscriptionForm" class="space-y-3">
+                        <div>
+                            <input type="email" 
+                                   id="emailInput" 
+                                   placeholder="您的邮箱地址" 
+                                   class="w-full px-4 py-2 rounded-lg bg-gray-700 border border-gray-600 text-white focus:outline-none focus:ring-2 focus:ring-indigo-500">
+                        </div>
+                        <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-4 rounded-lg transition-colors">
+                            <i class="fas fa-paper-plane mr-2"></i>
+                            <span data-lang="zh">订阅</span>
+                            <span data-lang="en" class="hidden">Subscribe</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="mt-12 pt-8 border-t border-gray-700 text-center text-gray-400">
+                <p>
+                    &copy; 2024 
+                    <span data-lang="zh">全球外国语大学联盟</span>
+                    <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                    . <span data-lang="zh">保留所有权利</span>
+                    <span data-lang="en" class="hidden">All rights reserved</span>
+                    .
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-6 right-6 bg-indigo-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-indigo-700 transition-all opacity-0 invisible">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        // Back to Top Button
+        const backToTopButton = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0', 'invisible');
+                backToTopButton.classList.add('opacity-100', 'visible');
+            } else {
+                backToTopButton.classList.remove('opacity-100', 'visible');
+                backToTopButton.classList.add('opacity-0', 'invisible');
+            }
+        });
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Simple Hero Collapsible Function - Global scope for onclick access
+        function toggleHero() {
+            const heroContent = document.getElementById('heroContent');
+            const toggleText = document.getElementById('toggleText');
+            const toggleIcon = document.getElementById('toggleIcon');
+            const mobileToggleText = document.getElementById('mobileToggleText');
+            const mobileToggleIcon = document.getElementById('mobileToggleIcon');
+            
+            // Get current language from localStorage or default to 'zh'
+            const currentLang = localStorage.getItem('gafsuLanguage') || 'zh';
+            
+            if (heroContent.classList.contains('hero-collapsed')) {
+                // Expand the hero section
+                heroContent.classList.remove('hero-collapsed');
+                
+                // Set the HTML with both languages for main toggle button
+                toggleText.innerHTML = '<span data-lang="zh">收起</span><span data-lang="en">Collapse</span>';
+                
+                // Apply current language settings for main toggle button
+                const zhSpan = toggleText.querySelector('[data-lang="zh"]');
+                const enSpan = toggleText.querySelector('[data-lang="en"]');
+                
+                if (currentLang === 'zh') {
+                    zhSpan.classList.remove('hidden');
+                    enSpan.classList.add('hidden');
+                } else {
+                    zhSpan.classList.add('hidden');
+                    enSpan.classList.remove('hidden');
+                }
+                
+                // 收起按钮显示向上箭头（表示点击后会向上收起）
+                toggleIcon.classList.remove('fa-chevron-down');
+                toggleIcon.classList.add('fa-chevron-up');
+                
+                // Update mobile toggle button
+                mobileToggleText.innerHTML = '<span data-lang="zh">收起</span><span data-lang="en">Collapse</span>';
+                
+                // Apply current language settings for mobile toggle button
+                const mobileZhSpan = mobileToggleText.querySelector('[data-lang="zh"]');
+                const mobileEnSpan = mobileToggleText.querySelector('[data-lang="en"]');
+                
+                if (currentLang === 'zh') {
+                    mobileZhSpan.classList.remove('hidden');
+                    mobileEnSpan.classList.add('hidden');
+                } else {
+                    mobileZhSpan.classList.add('hidden');
+                    mobileEnSpan.classList.remove('hidden');
+                }
+                
+                // 移动端收起按钮显示向上箭头
+                mobileToggleIcon.classList.remove('fa-chevron-down');
+                mobileToggleIcon.classList.add('fa-chevron-up');
+            } else {
+                // Collapse the hero section
+                heroContent.classList.add('hero-collapsed');
+                
+                // Set the HTML with both languages for main toggle button
+                toggleText.innerHTML = '<span data-lang="zh">展开</span><span data-lang="en">Expand</span>';
+                
+                // Apply current language settings for main toggle button
+                const zhSpan = toggleText.querySelector('[data-lang="zh"]');
+                const enSpan = toggleText.querySelector('[data-lang="en"]');
+                
+                if (currentLang === 'zh') {
+                    zhSpan.classList.remove('hidden');
+                    enSpan.classList.add('hidden');
+                } else {
+                    zhSpan.classList.add('hidden');
+                    enSpan.classList.remove('hidden');
+                }
+                
+                // 展开按钮显示向下箭头（表示点击后会向下展开）
+                toggleIcon.classList.remove('fa-chevron-up');
+                toggleIcon.classList.add('fa-chevron-down');
+                
+                // Update mobile toggle button
+                mobileToggleText.innerHTML = '<span data-lang="zh">展开</span><span data-lang="en">Expand</span>';
+                
+                // Apply current language settings for mobile toggle button
+                const mobileZhSpan = mobileToggleText.querySelector('[data-lang="zh"]');
+                const mobileEnSpan = mobileToggleText.querySelector('[data-lang="en"]');
+                
+                if (currentLang === 'zh') {
+                    mobileZhSpan.classList.remove('hidden');
+                    mobileEnSpan.classList.add('hidden');
+                } else {
+                    mobileZhSpan.classList.add('hidden');
+                    mobileEnSpan.classList.remove('hidden');
+                }
+                
+                // 移动端展开按钮显示向下箭头
+                mobileToggleIcon.classList.remove('fa-chevron-up');
+                mobileToggleIcon.classList.add('fa-chevron-down');
+            }
+        }
+
+        // Language Switching Functionality for Entire Page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    // Toggle menu icon (hamburger to X)
+                    const svg = this.querySelector('svg');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        // Change back to hamburger
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                    } else {
+                        // Change to X
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                    }
+                });
+            }
+            
+            // Check localStorage first, then URL parameter for initial language
+            const localStorageLang = localStorage.getItem('gafsuLanguage');
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlLang = urlParams.get('lang');
+            
+            // Determine initial language: localStorage has priority, then URL, then default to 'zh'
+            const initialLang = localStorageLang || urlLang || 'zh';
+            
+            // Language Switching Functionality
+            const langButtons = document.querySelectorAll('.lang-btn');
+            
+            // Function to update all internal links with language parameter
+            function updateLinksWithLanguage(lang) {
+                // Select all internal links
+                const links = document.querySelectorAll('a[href]');
+                
+                links.forEach(link => {
+                    // Skip external links (with http/https protocol)
+                    if (link.href.startsWith('http://') || link.href.startsWith('https://')) {
+                        return;
+                    }
+                    
+                    // Skip links that are just fragments (start with #)
+                    if (link.href.startsWith('#')) {
+                        return;
+                    }
+                    
+                    try {
+                        // Get the current URL object
+                        const currentUrl = new URL(link.href, window.location.origin);
+                        
+                        // Check if the link already has the correct language parameter
+                        if (currentUrl.searchParams.get('lang') === lang) {
+                            return; // Skip if already correct
+                        }
+                        
+                        // Update the link with language parameter
+                        currentUrl.searchParams.set('lang', lang);
+                        link.href = currentUrl.pathname + currentUrl.search;
+                    } catch (e) {
+                        console.log('Error updating link:', link.href, e);
+                    }
+                });
+            }
+            
+            // Function to switch entire page language
+            function switchLanguage(lang) {
+                // Get all elements with data-lang attribute
+                const allElements = document.querySelectorAll('[data-lang]');
+                
+                allElements.forEach(el => {
+                    if (el.dataset.lang === lang) {
+                        // Show elements with matching language
+                        el.classList.remove('hidden');
+                    } else {
+                        // Hide elements with non-matching language
+                        el.classList.add('hidden');
+                    }
+                });
+                
+                // Update email input placeholder based on language
+                const emailInput = document.getElementById('emailInput');
+                if (emailInput) {
+                    emailInput.placeholder = lang === 'zh' ? '您的邮箱地址' : 'Your Email Address';
+                }
+                
+                // Save language preference to localStorage for cross-page consistency
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                // Update URL with language parameter without reloading the page
+                const url = new URL(window.location.href);
+                url.searchParams.set('lang', lang);
+                history.replaceState(null, '', url);
+                
+                // Update all internal links with the current language parameter
+                updateLinksWithLanguage(lang);
+            }
+            
+            // Function to update button states
+            function updateButtonStates(activeBtn) {
+                langButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white', 'shadow-sm');
+                    btn.classList.add('bg-gray-800/50', 'text-gray-300');
+                });
+                activeBtn.classList.remove('bg-gray-800/50', 'text-gray-300');
+                activeBtn.classList.add('bg-blue-600', 'text-white', 'shadow-sm');
+            }
+            
+            // Set initial language
+            const initialBtn = document.getElementById(initialLang === 'zh' ? 'langZh' : 'langEn') || document.getElementById('langZh');
+            if (initialBtn) {
+                updateButtonStates(initialBtn);
+                switchLanguage(initialLang);
+            } else {
+                // If no button found, still update links with initial language
+                updateLinksWithLanguage(initialLang);
+            }
+            
+            // Add event listeners to desktop language buttons
+            document.getElementById('langZh')?.addEventListener('click', function() {
+                updateButtonStates(this);
+                switchLanguage('zh');
+            });
+            
+            document.getElementById('langEn')?.addEventListener('click', function() {
+                updateButtonStates(this);
+                switchLanguage('en');
+            });
+            
+            // Add event listeners to mobile language buttons
+            document.getElementById('mobileLangZh')?.addEventListener('click', function() {
+                updateButtonStates(this);
+                switchLanguage('zh');
+            });
+            
+            document.getElementById('mobileLangEn')?.addEventListener('click', function() {
+                updateButtonStates(this);
+                switchLanguage('en');
+            });
+            
+            // Subscription Form Handling
+            const subscriptionForm = document.getElementById('subscriptionForm');
+            const subscriptionMessage = document.getElementById('subscriptionMessage');
+            
+            if (subscriptionForm && subscriptionMessage) {
+                subscriptionForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    // Show the success message with fade-in effect
+                    subscriptionMessage.classList.remove('hidden');
+                    setTimeout(() => {
+                        subscriptionMessage.style.opacity = '1';
+                    }, 10);
+                    
+                    // Hide the message after 5 seconds with fade-out effect
+                    setTimeout(() => {
+                        subscriptionMessage.style.opacity = '0';
+                        setTimeout(() => {
+                            subscriptionMessage.classList.add('hidden');
+                        }, 300); // Wait for the transition to complete
+                    }, 5000);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
