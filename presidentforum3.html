@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>第三届全球外国语大学联盟校长论坛在北京外国语大学举行 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // 移动下拉菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有移动下拉菜单
+            const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+            
+            // 为每个下拉菜单添加点击事件
+            mobileDropdowns.forEach(dropdown => { 
+                const toggleButton = dropdown.querySelector('.mobile-dropdown-toggle');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                const icon = toggleButton.querySelector('i');
+                
+                toggleButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 切换菜单显示
+                    menu.classList.toggle('hidden');
+                    
+                    // 切换图标旋转
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Hero background decoration */
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23ffffff" fill-opacity="0.05" fill-rule="evenodd"/%3E%3C/svg%3E');
+        }
+        
+        /* Hero decoration elements */
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        /* Ensure hero content is above decorations */
+        .hero-gradient > .content-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Hero title styles */
+        .hero-gradient h1 {
+            @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-4;
+            color: white;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            letter-spacing: -0.03em;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+        
+        /* Responsive hero title */
+        @media (max-width: 768px) {
+            .hero-gradient h1 {
+                font-size: 2.25rem;
+                line-height: 1.25;
+            }
+        }
+    
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+      
+        /* Content container */
+        .content-container {
+            @apply max-w-7xl mx-auto px-6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .region-section {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            h4 {
+                font-size: 1.25rem;
+            }
+            h5 {
+                font-size: 1rem;
+            }
+        }
+        /* Navigation styles */
+        /* 统一导航栏链接样式 */
+            @apply transition-all duration-200;
+        
+    /* 统一导航栏链接样式 */
+
+/* 移动导航链接样式 */
+/* 统一导航栏链接样式 */
+.nav-link {
+    @apply text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    @apply text-blue-400;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* 移动导航链接样式 */
+.mobile-nav-link {
+    @apply block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-blue-600/20 transition-all duration-300;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.mobile-nav-link.active {
+    @apply bg-blue-600/20 text-blue-400;
+}
+/* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 shadow-lg overflow-visible relative">
+        <!-- Tech Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_80%,rgba(102,126,234,0.15)_0%,transparent_50%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_0%,rgba(102,126,234,0.05)_50%,transparent_100%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <!-- Animated Grid Lines -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg_width="100"_height="100"_viewBox="0_0_100_100"_xmlns="http://www.w3.org/2000/svg"%3E%3Cpath_d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7_3.134-7_7 3.134_7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z"_fill="%23667eea"_fill-opacity="0.08"_fill-rule="evenodd"/%3E%3C/svg%3E') opacity-20"></div>
+        </div>
+        <div class="max-w-none mx-auto px-2 sm:px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center group">
+                        <div class="w-16 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40">
+                            <span class="text-white font-bold text-base tracking-wider">GAFSU</span>
+                        </div>
+                        <span class="ml-2 text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hidden md:inline transition-all duration-300 group-hover:opacity-100">
+                            <span data-lang="zh">全球外国语大学联盟</span>
+                            <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden min-[1838px]:flex items-center space-x-1">
+                    <!-- Search Bar -->
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="搜索..." class="bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 w-48 hover:w-64">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-8">
+                        <!-- Chinese Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="zh">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                首页
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                关于我们
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟成员
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟发展历程
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- 联盟活动下拉菜单 -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative flex items-center">
+                                联盟活动
+                                <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                            </a>
+                                <!-- 下拉菜单内容 -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="zh"></div>
+                        
+                        <!-- English Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="en">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Home
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                About Us
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Member Universities
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Alliance History
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- Alliance Activities Dropdown -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative flex items-center">
+                                    Alliance Activities
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                                </a>
+                                <!-- Dropdown Menu Content -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="en"></div>
+                        
+                        <!-- Language Switcher -->
+                        <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-blue-500/30">
+                            <button id="langZh" class="lang-btn px-4 py-1.5 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30">中文</button>
+                            <button id="langEn" class="lang-btn px-4 py-1.5 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="min-[1838px]:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-blue-500/30 text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="min-[1838px]:hidden mobile-menu hidden bg-gray-900/95 backdrop-blur-lg border-t border-blue-500/30 transition-all duration-500 relative z-10">
+            <div class="px-2 pt-4 pb-6 space-y-3 sm:px-3">
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <input type="text" placeholder="搜索..." class="w-full bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- Chinese Navigation -->
+                <div data-lang="zh">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">首页</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">关于我们</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟成员</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟发展历程</a>
+                    
+                    <!-- 联盟活动移动下拉菜单 -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500 flex items-center justify-between">
+                            联盟活动
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- 下拉菜单内容 -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English Navigation -->
+                <div data-lang="en" class="hidden">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Home</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">About Us</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Member Universities</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Alliance History</a>
+                    
+                    <!-- Alliance Activities Mobile Dropdown -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500 flex items-center justify-between">
+                            Alliance Activities
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- Dropdown Menu Content -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Language Switcher -->
+                <div class="border-t border-blue-500/30 pt-4 mt-4">
+                    <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 mx-3">
+                        <button id="mobileLangZh" class="lang-btn w-full px-4 py-2 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700">中文</button>
+                        <button id="mobileLangEn" class="lang-btn w-full px-4 py-2 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="content-container">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-4 flex items-center space-x-3 text-sm opacity-90">
+                    <!-- Chinese Version -->
+                    <div data-lang="zh">
+                        <a href="index.html" class="hover:text-blue-300 transition-colors duration-200">首页</a>
+                        <span>›</span>
+                        <span>联盟活动</span>
+                        <span>›</span>
+                        <a href="Presidentsforum.html" class="hover:text-blue-300 transition-colors duration-200">校长论坛</a>
+                        <span>›</span>
+                        <span>新闻详情</span>
+                    </div>
+                    <!-- English Version -->
+                    <div data-lang="en" class="hidden">
+                        <a href="index.html" class="hover:text-blue-300 transition-colors duration-200">Home</a>
+                        <span>›</span>
+                        <span>Alliance Activities</span>
+                        <span>›</span>
+                        <a href="Presidentsforum.html" class="hover:text-blue-300 transition-colors duration-200">President's Forum</a>
+                        <span>›</span>
+                        <span>News Details</span>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" data-lang="zh">第三届全球外国语大学联盟校长论坛在北京外国语大学举行</h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight hidden" data-lang="en">The Third GAFSU President's Forum was Held at Beijing Foreign Studies University</h1>
+                
+                <div class="flex flex-wrap items-center gap-4 text-sm opacity-90">
+                    <div class="flex items-center">
+                        <i class="far fa-calendar mr-2"></i>
+                        <span data-lang="zh">2021年09月26日</span>
+                        <span data-lang="en" class="hidden">September 26, 2021</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-user mr-2"></i>
+                        <span data-lang="zh">GAFSU秘书处</span>
+                        <span data-lang="en" class="hidden">GAFSU Secretariat</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-eye mr-2"></i>
+                        <span>1,567</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Content Section -->
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-4xl mx-auto">
+
+                <!-- Featured Image -->
+                <div class="mb-12">
+                    <div class="relative overflow-hidden rounded-xl shadow-2xl group">
+                        <img 
+                            src="pic/meeting/3.jpg" 
+                            alt="第三届全球外国语大学联盟校长论坛现场" 
+                            class="w-full h-auto object-contain"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+
+                <!-- News Content -->
+                <div class="prose prose-lg max-w-none">
+                    <div data-lang="zh">
+                        <h2 class="text-2xl font-bold mb-6 section-header">第三届全球外国语大学联盟校长论坛</h2>
+                                                
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">2021年9月26日，第三届全球外国语大学联盟校长论坛在北京外国语大学成功举行。本次论坛以"疫情下的全球外语教育与跨文化交流"为主题，吸引了来自全球30余所外国语大学的校长和代表通过线上线下相结合的方式参会。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">在全球疫情持续蔓延的背景下，本次论坛聚焦于外语教育在构建人类命运共同体中的重要作用，探讨如何通过创新教学模式、深化国际合作，应对疫情带来的挑战，推动全球外语教育的可持续发展。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">论坛开幕式上，教育部相关领导、北京外国语大学校长以及联盟轮值主席分别致辞。他们强调，全球外国语大学联盟作为重要的国际教育合作平台，应进一步加强成员之间的交流与合作，共同探索外语教育的新路径、新模式，为促进不同国家和地区的人文交流与文明互鉴做出更大贡献。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">本次论坛设有三个平行分论坛，分别围绕"多语种人才培养模式创新"、"数字技术与外语教育融合"以及"区域国别研究与全球治理"等议题展开深入讨论。与会代表分享了各自学校在疫情期间的教学改革经验，探讨了数字技术在外语教学中的应用，以及区域国别研究如何更好地服务于全球治理。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">论坛期间，还举行了全球外国语大学联盟学术委员会成立仪式，并发布了《全球外国语大学联盟2021-2025发展规划》。该规划明确了联盟未来五年的发展目标和重点任务，包括加强成员间的学术交流与合作、推动多语种人才培养、深化区域国别研究、促进数字技术与外语教育融合等。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">第三届全球外国语大学联盟校长论坛的成功举办，为全球外语教育界提供了一个重要的交流平台，进一步深化了联盟成员之间的合作与友谊。与会代表一致表示，将以本次论坛为契机，继续加强合作，共同应对全球外语教育面临的挑战，为推动全球外语教育的繁荣发展和构建人类命运共同体贡献力量。</p>
+
+                    </div>
+                    
+                    <div data-lang="en" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6 section-header">The Third GAFSU President's Forum</h2>
+                                                
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">On September 26, 2021, the Third Global Alliance of Foreign Studies Universities (GAFSU) President's Forum was successfully held at Beijing Foreign Studies University. With the theme of "Global Foreign Language Education and Cross-cultural Exchange Under the Pandemic," the forum attracted presidents and representatives from more than 30 foreign studies universities around the world, participating both online and offline.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Against the backdrop of the ongoing global pandemic, this forum focused on the important role of foreign language education in building a community with a shared future for mankind, exploring how to address the challenges brought by the pandemic and promote the sustainable development of global foreign language education through innovative teaching models and deepened international cooperation.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">At the opening ceremony, relevant leaders from the Ministry of Education, the President of Beijing Foreign Studies University, and the rotating chair of the alliance delivered speeches respectively. They emphasized that as an important international educational cooperation platform, GAFSU should further strengthen exchanges and cooperation among members, jointly explore new paths and models for foreign language education, and make greater contributions to promoting cultural exchanges and mutual learning among different countries and regions.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">The forum featured three parallel sub-forums, which conducted in-depth discussions on topics such as "Innovation in Multilingual Talent Cultivation Models," "Integration of Digital Technology and Foreign Language Education," and "Regional and Country Studies and Global Governance." Participants shared their respective universities' teaching reform experiences during the pandemic, discussed the application of digital technology in foreign language teaching, and explored how regional and country studies can better serve global governance.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">During the forum, the establishment ceremony of the Academic Committee of GAFSU was also held, and the "GAFSU 2021-2025 Development Plan" was released. This plan clearly defines the alliance's development goals and key tasks for the next five years, including strengthening academic exchanges and cooperation among members, promoting multilingual talent cultivation, deepening regional and country studies, and facilitating the integration of digital technology and foreign language education.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">The successful holding of the Third GAFSU President's Forum provided an important exchange platform for the global foreign language education community, further deepening cooperation and friendship among alliance members. Participants unanimously stated that they will take this forum as an opportunity to continue strengthening cooperation, jointly address the challenges facing global foreign language education, and contribute to promoting the prosperity and development of global foreign language education and building a community with a shared future for mankind.</p>
+
+                    </div>
+                </div>
+
+                <!-- Related News Section -->
+                <div class="mt-16">
+                    <h3 class="text-2xl font-bold mb-6 section-header" data-lang="zh">相关新闻</h3>
+                    <h3 class="text-2xl font-bold mb-6 section-header hidden" data-lang="en">Related News</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <!-- Related News Card 1 -->
+                        <a href="presidentforum2.html" class="group bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                            <img src="pic/meeting/2.jpg" alt="第二届全球外国语大学联盟校长论坛" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="p-6">
+                                <h4 class="text-lg font-semibold mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                    <span data-lang="zh">第二届全球外国语大学联盟校长论坛在西安外国语大学举行</span>
+                                    <span data-lang="en" class="hidden">The Second GAFSU President's Forum was Held at Xi'an Foreign Studies University</span>
+                                </h4>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="far fa-calendar mr-2"></i>
+                                    <span data-lang="zh">2019-09-27</span>
+                                    <span data-lang="en" class="hidden">September 27, 2019</span>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Related News Card 2 -->
+                        <a href="presidentforum1.html" class="group bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                            <img src="pic/meeting/1.jpg" alt="第一届全球外国语大学联盟校长论坛" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="p-6">
+                                <h4 class="text-lg font-semibold mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                    <span data-lang="zh">第一届全球外国语大学联盟校长论坛在北京外国语大学举行</span>
+                                    <span data-lang="en" class="hidden">The First GAFSU President's Forum was Held at Beijing Foreign Studies University</span>
+                                </h4>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="far fa-calendar mr-2"></i>
+                                    <span data-lang="zh">2017-05-19</span>
+                                    <span data-lang="en" class="hidden">May 19, 2017</span>
+                                </div>
+                            </div>
+                        </a>
+                        <!-- Related News Card 3 -->
+                        <a href="presidentforum4.html" class="group bg-white border border-gray-200 rounded-xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden">
+                            <img src="pic/meeting/4.jpg" alt="第四届全球外国语大学联盟校长论坛" class="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500">
+                            <div class="p-6">
+                                <h4 class="text-lg font-semibold mb-2 group-hover:text-blue-600 transition-colors duration-200">
+                                    <span data-lang="zh">第四届全球外国语大学联盟校长论坛在上海外国语大学举行</span>
+                                    <span data-lang="en" class="hidden">The Fourth GAFSU President's Forum was Held at Shanghai International Studies University</span>
+                                </h4>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <i class="far fa-calendar mr-2"></i>
+                                    <span data-lang="zh">2023-09-15</span>
+                                    <span data-lang="en" class="hidden">September 15, 2023</span>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="content-container text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript for mobile menu and language switching -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                    // Toggle menu icon (hamburger to X)
+                    const svg = this.querySelector('svg');
+                    if (mobileMenu.classList.contains('hidden')) {
+                        // Change back to hamburger
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />';
+                    } else {
+                        // Change to X
+                        svg.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />';
+                    }
+                });
+            }
+            
+            // Language Switching Functionality
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                // Hide all elements with data-lang attribute
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Show only elements with the selected language
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+                
+                // Update language button states
+                const langButtons = document.querySelectorAll('.lang-btn');
+                langButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-800/50', 'text-gray-300');
+                });
+                
+                // Highlight the active language button
+                const activeButtons = document.querySelectorAll(`#lang${lang === 'zh' ? 'Zh' : 'En'}, #mobileLang${lang === 'zh' ? 'Zh' : 'En'}`);
+                activeButtons.forEach(btn => {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('bg-gray-800/50', 'text-gray-300');
+                });
+            }
+            
+            // Add click event listeners to language buttons
+            const langZhButtons = document.querySelectorAll('#langZh, #mobileLangZh');
+            const langEnButtons = document.querySelectorAll('#langEn, #mobileLangEn');
+            
+            langZhButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('zh'));
+            });
+            
+            langEnButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('en'));
+            });
+            
+            // Initialize with saved language or default to Chinese
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+    </script>
+</body>
+</html>

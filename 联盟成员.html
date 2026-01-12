@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>联盟成员 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // 移动下拉菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有移动下拉菜单
+            const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+            
+            // 为每个下拉菜单添加点击事件
+            mobileDropdowns.forEach(dropdown => {
+                const toggleButton = dropdown.querySelector('.mobile-dropdown-toggle');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                const icon = toggleButton.querySelector('i');
+                
+                toggleButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 切换菜单显示
+                    menu.classList.toggle('hidden');
+                    
+                    // 切换图标旋转
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        });
+    </script>
+    <!-- Baidu Maps API -->
+    <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=E4805d16520de693a3fe707cdc962045&callback=initBaiduMap" async defer></script>
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Hero background decoration */
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23ffffff" fill-opacity="0.05" fill-rule="evenodd"/%3E%3C/svg%3E');
+        }
+        
+        /* Hero decoration elements */
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+        }
+        
+        /* Hero title styles */
+        .hero-gradient h1 {
+            @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-4;
+            color: white;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            letter-spacing: -0.03em;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+        
+        /* Responsive hero title */
+        @media (max-width: 768px) {
+            .hero-gradient h1 {
+                font-size: 2.25rem;
+                line-height: 1.25;
+            }
+        }
+        /* Map container styles */
+        .map-container {
+            position: relative;
+            width: 100%;
+            height: 600px;
+            background-color: #f8fafc;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        /* Map legend styles */
+        .map-legend {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+        /* Map marker styles */
+        .map-marker {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .map-marker:hover {
+            transform: scale(1.5);
+            z-index: 20;
+        }
+        /* Country tooltip styles */
+        .country-tooltip {
+            position: absolute;
+            background: white;
+            padding: 8px 12px;
+            border-radius: 6px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            z-index: 30;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        /* Member card styles */
+        .member-card {
+            transition: all 0.3s ease;
+        }
+        .member-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        /* List styles */
+        .member-list {
+            list-style-type: none;
+            padding-left: 0;
+            margin: 0;
+        }
+        .member-list li {
+            margin-bottom: 0.75rem;
+            padding: 0.75rem 1rem;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .member-list li:hover {
+            background-color: #f1f5f9;
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        /* Member card layout */
+        .members-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        /* Member region section */
+        .region-section {
+            background-color: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #e2e8f0;
+        }
+        /* Batch container */
+        .batch-container {
+            margin-bottom: 1.5rem;
+        }
+        /* Batch header */
+        .batch-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e2e8f0;
+        }
+        /* Batch badge */
+        .batch-badge {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 0.75rem;
+        }
+        .batch-badge.founding {
+            background-color: #4f46e5; /* Indigo 600 */
+        }
+        .batch-badge.second {
+            background-color: #a855f7; /* Purple 500 */
+        }
+        .batch-badge.third {
+            background-color: #3b82f6; /* Blue 500 */
+        }
+        .batch-badge.fourth {
+            background-color: #f97316; /* Orange 500 */
+        }
+        /* University info */
+        .university-info {
+            display: flex;
+            flex-direction: column;
+        }
+        .university-name {
+            font-weight: 600;
+            color: #1e293b;
+            margin-bottom: 0.25rem;
+        }
+        .university-location {
+            font-size: 0.875rem;
+            color: #64748b;
+        }
+        /* Content container */
+        .content-container {
+            @apply max-w-7xl mx-auto px-6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .region-section {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            h4 {
+                font-size: 1.25rem;
+            }
+            h5 {
+                font-size: 1rem;
+            }
+        }
+        /* Navigation styles */
+        /* 统一导航栏链接样式 */
+            @apply transition-all duration-200;
+        }
+    /* 统一导航栏链接样式 */
+
+/* 移动导航链接样式 */
+/* 统一导航栏链接样式 */
+.nav-link {
+    @apply text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    @apply text-blue-400;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* 移动导航链接样式 */
+.mobile-nav-link {
+    @apply block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-blue-600/20 transition-all duration-300;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.mobile-nav-link.active {
+    @apply bg-blue-600/20 text-blue-400;
+}
+/* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 shadow-lg overflow-visible relative">
+        <!-- Tech Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_80%,rgba(102,126,234,0.15)_0%,transparent_50%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_0%,rgba(102,126,234,0.05)_50%,transparent_100%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <!-- Animated Grid Lines -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg_width=\"100\"_height=\"100\"_viewBox=\"0_0_100_100\"_xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath_d=\"M11_18c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm48_25c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm-43-7c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm63_31c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM34_90c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm56-76c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM12_86c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm28-65c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm23-11c2.76_0_5-2.24_5-5s-2.24-5-5-5-5_2.24-5_5_2.24_5_5_5zm-6 60c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm29 22c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zM32 63c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm57-13c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm-9-21c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM60 91c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM35 41c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM12 60c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2z"_fill="%23667eea"_fill-opacity="0.08"_fill-rule="evenodd"/%3E%3C/svg%3E') opacity-20"></div>
+        </div>
+        <div class="max-w-none mx-auto px-2 sm:px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center group">
+                        <div class="w-16 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40">
+                            <span class="text-white font-bold text-base tracking-wider">GAFSU</span>
+                        </div>
+                        <span class="ml-2 text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hidden md:inline transition-all duration-300 group-hover:opacity-100">
+                            <span data-lang="zh">全球外国语大学联盟</span>
+                            <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden min-[1838px]:flex items-center space-x-1">
+                    <!-- Search Bar -->
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="搜索..." class="bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 w-48 hover:w-64">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-8">
+                        <!-- Chinese Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="zh">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                首页
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                关于我们
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative group">
+                                联盟成员
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟发展历程
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- 联盟活动下拉菜单 -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative flex items-center">
+                                    联盟活动
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                                </a>
+                                <!-- 下拉菜单内容 -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="zh"></div>
+                        
+                        <!-- English Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="en">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Home
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                About Us
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative group">
+                                Member Universities
+                                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Alliance History
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- Alliance Activities Dropdown -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative flex items-center">
+                                    Alliance Activities
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                                </a>
+                                <!-- Dropdown Menu Content -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="en"></div>
+                        
+                        <!-- Language Switcher -->
+                        <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-blue-500/30">
+                            <button id="langZh" class="lang-btn px-4 py-1.5 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30">中文</button>
+                            <button id="langEn" class="lang-btn px-4 py-1.5 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="min-[1838px]:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-blue-500/30 text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="min-[1838px]:hidden mobile-menu hidden bg-gray-900/95 backdrop-blur-lg border-t border-blue-500/30 transition-all duration-500 relative z-10">
+            <div class="px-2 pt-4 pb-6 space-y-3 sm:px-3">
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <input type="text" placeholder="搜索..." class="w-full bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- Chinese Navigation -->
+                <div data-lang="zh">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">首页</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">关于我们</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500">联盟成员</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟发展历程</a>
+                    
+                    <!-- 联盟活动移动下拉菜单 -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500 flex items-center justify-between">
+                            联盟活动
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- 下拉菜单内容 -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English Navigation -->
+                <div data-lang="en" class="hidden">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Home</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">About Us</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500">Member Universities</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Alliance History</a>
+                    
+                    <!-- Alliance Activities Mobile Dropdown -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500 flex items-center justify-between">
+                            Alliance Activities
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- Dropdown Menu Content -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Language Switcher -->
+                <div class="border-t border-blue-500/30 pt-4 mt-4">
+                    <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 mx-3">
+                        <button id="mobileLangZh" class="lang-btn w-full px-4 py-2 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700">中文</button>
+                        <button id="mobileLangEn" class="lang-btn w-full px-4 py-2 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="content-container text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4" data-lang="zh">联盟成员</h1>
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 hidden" data-lang="en">Member Universities</h1>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto" data-lang="zh">全球外国语大学联盟成员高校</p>
+            <p class="text-xl text-white/90 max-w-3xl mx-auto hidden" data-lang="en">Global Alliance of Foreign Studies Universities Member Universities</p>
+        </div>
+    </section>
+
+    <!-- Interactive Map Section -->
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <!-- Map Title -->
+            <div data-lang="zh">
+                <h2 class="text-2xl font-bold mb-8 text-center section-header">联盟成员分布地图</h2>
+            </div>
+            <div data-lang="en" class="hidden">
+                <h2 class="text-2xl font-bold mb-8 text-center section-header">Alliance Members Map</h2>
+            </div>
+            
+            <!-- Single Map Container -->
+            <div class="relative">
+                <div id="baiduMap" class="w-full h-[400px] md:h-[600px] lg:h-[700px]"></div>
+                
+                <!-- Chinese Legend -->
+                <div data-lang="zh" class="absolute top-2 right-2 bg-white p-3 rounded-lg shadow-md">
+                    <h3 class="font-semibold mb-2">图例</h3>
+                    <div class="space-y-1">
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-indigo-600 rounded-full mr-2"></div>
+                            <span>初创成员</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                            <span>第二批成员</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                            <span>第三批成员</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                            <span>第四批成员</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English Legend -->
+                <div data-lang="en" class="absolute top-2 right-2 bg-white p-3 rounded-lg shadow-md hidden">
+                    <h3 class="font-semibold mb-2">Legend</h3>
+                    <div class="space-y-1">
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-indigo-600 rounded-full mr-2"></div>
+                            <span>Founding Members</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-purple-500 rounded-full mr-2"></div>
+                            <span>Second Batch Members</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                            <span>Third Batch Members</span>
+                        </div>
+                        <div class="flex items-center text-sm">
+                            <div class="w-3 h-3 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Fourth Batch Members</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Members List Section -->
+    <section class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- Chinese Version -->
+            <div data-lang="zh">
+                <h2 class="text-2xl font-bold mb-12 text-center section-header">联盟成员名单</h2>
+                
+                <!-- Foreign Universities -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header">国外高校</h3>
+                    
+                    <div class="members-grid">
+                        <!-- Africa -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">非洲</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>穆罕默德五世大学</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Fourth Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge fourth"></div>
+                                    <h5 class="text-lg font-medium">第四批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>麦克雷雷大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- South America -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">南美洲</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>利马大学</li>
+                                    <li>墨西哥国立自治大学</li>
+                                    <li>智利瓦尔帕莱索天主教大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Europe -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">欧洲</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>基辅国立语言大学</li>
+                                    <li>莫斯科国际关系学院</li>
+                                    <li>莫斯科国立语言大学</li>
+                                    <li>慕尼黑高翻学院</li>
+                                    <li>索菲亚大学</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Second Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge second"></div>
+                                    <h5 class="text-lg font-medium">第二批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>明斯克国立语言大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Asia (Foreign) -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">亚洲（国外）</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>阿塞拜疆语言大学</li>
+                                    <li>哈萨克斯坦国立大学</li>
+                                    <li>韩国外国语大学</li>
+                                    <li>东京外国语大学</li>
+                                    <li>乌兹别克斯坦国立世界语言大学</li>
+                                    <li>古吉拉特中央大学</li>
+                                    <li>日惹国立大学</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Second Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge second"></div>
+                                    <h5 class="text-lg font-medium">第二批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>斯里·贾耶瓦日德纳大学</li>
+                                    <li>清迈皇家大学</li>
+                                    <li>河内国家大学所属人文社科大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Domestic Universities -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header">国内高校</h3>
+                    
+                    <div class="members-grid">
+                        <!-- Beijing -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">北京</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>北京外国语大学</li>
+                                    <li>北京第二外国语学院</li>
+                                    <li>北京语言大学</li>
+                                    <li>对外经济贸易大学</li>
+                                    <li>国际关系学院</li>
+                                    <li>外交学院</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Third Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge third"></div>
+                                    <h5 class="text-lg font-medium">第三批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>首都经济贸易大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Guangzhou -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">广州</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>广东外语外贸大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Shanghai -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">上海</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>上海外国语大学</li>
+                                    <li>上海对外经贸大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Changchun -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">长春</h4>
+                            
+                            <!-- Second Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge second"></div>
+                                    <h5 class="text-lg font-medium">第二批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>吉林外国语大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Dalian -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">大连</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>大连外国语大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Chongqing -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">重庆</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>四川外国语大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Tianjin -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">天津</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>天津外国语大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Xi'an -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">西安</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>西安外国语大学</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Zhejiang -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">浙江</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">初创成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>浙江外国语学院</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Third Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge third"></div>
+                                    <h5 class="text-lg font-medium">第三批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>浙江师范大学</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Fourth Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge fourth"></div>
+                                    <h5 class="text-lg font-medium">第四批成员</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>浙江越秀外国语学院</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- English Version -->
+            <div data-lang="en" class="hidden">
+                <h2 class="text-2xl font-bold mb-12 text-center section-header">Alliance Members</h2>
+                
+                <!-- Foreign Universities -->
+                <div class="mb-16">
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header">International Universities</h3>
+                    
+                    <div class="members-grid">
+                        <!-- Africa -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Africa</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Mohammed V University</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Fourth Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge fourth"></div>
+                                    <h5 class="text-lg font-medium">Fourth Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Makerere University</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- South America -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">South America</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>University of Lima</li>
+                                    <li>National Autonomous University of Mexico</li>
+                                    <li>Catholic University of Valparaíso</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Europe -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Europe</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Kyiv National Linguistic University</li>
+                                    <li>Moscow State Institute of International Relations</li>
+                                    <li>Moscow State Linguistic University</li>
+                                    <li>University of Munich</li>
+                                    <li>Sofia University</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Second Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge second"></div>
+                                    <h5 class="text-lg font-medium">Second Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Minsk State Linguistic University</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Asia (Foreign) -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Asia (International)</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Azerbaijan University of Languages</li>
+                                    <li>Al-Farabi Kazakh National University</li>
+                                    <li>Hankuk University of Foreign Studies</li>
+                                    <li>Tokyo University of Foreign Studies</li>
+                                    <li>Uzbekistan State University of World Languages</li>
+                                    <li>Central University of Gujarat</li>
+                                    <li>Gadjah Mada University</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Second Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge second"></div>
+                                    <h5 class="text-lg font-medium">Second Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Sri Jayewardenepura University</li>
+                                    <li>Chiang Mai Rajabhat University</li>
+                                    <li>University of Social Sciences and Humanities, VNU</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Domestic Universities -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header">Chinese Universities</h3>
+                    
+                    <div class="members-grid">
+                        <!-- Beijing -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Beijing</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Beijing Foreign Studies University</li>
+                                    <li>Beijing International Studies University</li>
+                                    <li>Beijing Language and Culture University</li>
+                                    <li>University of International Business and Economics</li>
+                                    <li>University of International Relations</li>
+                                    <li>China Foreign Affairs University</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Third Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge third"></div>
+                                    <h5 class="text-lg font-medium">Third Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Capital University of Economics and Business</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Guangzhou -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Guangzhou</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Guangdong University of Foreign Studies</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Shanghai -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Shanghai</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Shanghai International Studies University</li>
+                                    <li>Shanghai University of International Business and Economics</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Changchun -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Changchun</h4>
+                            
+                            <!-- Second Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge second"></div>
+                                    <h5 class="text-lg font-medium">Second Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Jilin International Studies University</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Dalian -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Dalian</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Dalian University of Foreign Languages</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Chongqing -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Chongqing</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Sichuan International Studies University</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Tianjin -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Tianjin</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Tianjin Foreign Studies University</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Xi'an -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Xi'an</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Xi'an International Studies University</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <!-- Zhejiang -->
+                        <div class="region-section">
+                            <h4 class="text-xl font-semibold mb-6 section-header">Zhejiang</h4>
+                            
+                            <!-- Founding Members -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge founding"></div>
+                                    <h5 class="text-lg font-medium">Founding Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Zhejiang International Studies University</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Third Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge third"></div>
+                                    <h5 class="text-lg font-medium">Third Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Zhejiang Normal University</li>
+                                </ul>
+                            </div>
+                            
+                            <!-- Fourth Batch -->
+                            <div class="batch-container">
+                                <div class="batch-header">
+                                    <div class="batch-badge fourth"></div>
+                                    <h5 class="text-lg font-medium">Fourth Batch Members</h5>
+                                </div>
+                                <ul class="member-list">
+                                    <li>Zhejiang Yuexiu University of Foreign Languages</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Language Switching
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+                
+                // Update language button states
+                const langButtons = document.querySelectorAll('.lang-btn');
+                langButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-800/50', 'text-gray-300');
+                });
+                
+                // Highlight the active language button
+                const activeButtons = document.querySelectorAll(`#lang${lang === 'zh' ? 'Zh' : 'En'}, #mobileLang${lang === 'zh' ? 'Zh' : 'En'}`);
+                activeButtons.forEach(btn => {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('bg-gray-800/50', 'text-gray-300');
+                });
+            }
+            
+            const langZhButtons = document.querySelectorAll('#langZh, #mobileLangZh');
+            const langEnButtons = document.querySelectorAll('#langEn, #mobileLangEn');
+            
+            langZhButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('zh'));
+            });
+            
+            langEnButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('en'));
+            });
+            
+            // Initialize with saved language or default to Chinese
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+        
+        // Member locations with actual geographic coordinates (longitude, latitude)
+        const memberLocations = [
+            // Europe
+            { 
+                name: '俄罗斯', 
+                city: '莫斯科', 
+                lng: 37.6156, 
+                lat: 55.7522, 
+                batch: 'founding', 
+                university: '莫斯科国际关系学院', 
+                englishUniversity: 'Moscow State Institute of International Relations',
+                country: '俄罗斯',
+                englishCountry: 'Russia',
+                englishCity: 'Moscow'
+            },
+            { 
+                name: '俄罗斯', 
+                city: '莫斯科', 
+                lng: 37.5886, 
+                lat: 55.7343, 
+                batch: 'founding', 
+                university: '莫斯科国立语言大学', 
+                englishUniversity: 'Moscow State Linguistic University',
+                country: '俄罗斯',
+                englishCountry: 'Russia',
+                englishCity: 'Moscow'
+            },
+            { 
+                name: '德国', 
+                city: '慕尼黑', 
+                lng: 11.5820, 
+                lat: 48.1351, 
+                batch: 'founding', 
+                university: '慕尼黑高翻学院', 
+                englishUniversity: 'University of Munich',
+                country: '德国',
+                englishCountry: 'Germany',
+                englishCity: 'Munich'
+            },
+            { 
+                name: '乌克兰', 
+                city: '基辅', 
+                lng: 30.5234, 
+                lat: 50.4501, 
+                batch: 'founding', 
+                university: '基辅国立语言大学', 
+                englishUniversity: 'Kyiv National Linguistic University',
+                country: '乌克兰',
+                englishCountry: 'Ukraine',
+                englishCity: 'Kyiv'
+            },
+            { 
+                name: '保加利亚', 
+                city: '索菲亚', 
+                lng: 23.3219, 
+                lat: 42.6977, 
+                batch: 'founding', 
+                university: '索菲亚大学', 
+                englishUniversity: 'Sofia University',
+                country: '保加利亚',
+                englishCountry: 'Bulgaria',
+                englishCity: 'Sofia'
+            },
+            { 
+                name: '白俄罗斯', 
+                city: '明斯克', 
+                lng: 27.5619, 
+                lat: 53.9045, 
+                batch: 'second', 
+                university: '明斯克国立语言大学', 
+                englishUniversity: 'Minsk State Linguistic University',
+                country: '白俄罗斯',
+                englishCountry: 'Belarus',
+                englishCity: 'Minsk'
+            },
+            
+            // Asia (Foreign)
+            { 
+                name: '韩国', 
+                city: '首尔', 
+                lng: 127.0016, 
+                lat: 37.5665, 
+                batch: 'founding', 
+                university: '韩国外国语大学', 
+                englishUniversity: 'Hankuk University of Foreign Studies',
+                country: '韩国',
+                englishCountry: 'South Korea',
+                englishCity: 'Seoul'
+            },
+            { 
+                name: '日本', 
+                city: '东京', 
+                lng: 139.6917, 
+                lat: 35.6895, 
+                batch: 'founding', 
+                university: '东京外国语大学', 
+                englishUniversity: 'Tokyo University of Foreign Studies',
+                country: '日本',
+                englishCountry: 'Japan',
+                englishCity: 'Tokyo'
+            },
+            { 
+                name: '阿塞拜疆', 
+                city: '巴库', 
+                lng: 49.8671, 
+                lat: 40.3927, 
+                batch: 'founding', 
+                university: '阿塞拜疆语言大学', 
+                englishUniversity: 'Azerbaijan University of Languages',
+                country: '阿塞拜疆',
+                englishCountry: 'Azerbaijan',
+                englishCity: 'Baku'
+            },
+            { 
+                name: '哈萨克斯坦', 
+                city: '努尔苏丹', 
+                lng: 71.4308, 
+                lat: 51.1657, 
+                batch: 'founding', 
+                university: '哈萨克斯坦国立大学', 
+                englishUniversity: 'Al-Farabi Kazakh National University',
+                country: '哈萨克斯坦',
+                englishCountry: 'Kazakhstan',
+                englishCity: 'Nur-Sultan'
+            },
+            { 
+                name: '乌兹别克斯坦', 
+                city: '塔什干', 
+                lng: 69.2401, 
+                lat: 41.3111, 
+                batch: 'founding', 
+                university: '乌兹别克斯坦国立世界语言大学', 
+                englishUniversity: 'Uzbekistan State University of World Languages',
+                country: '乌兹别克斯坦',
+                englishCountry: 'Uzbekistan',
+                englishCity: 'Tashkent'
+            },
+            { 
+                name: '印度', 
+                city: '艾哈迈达巴德', 
+                lng: 72.5714, 
+                lat: 23.0225, 
+                batch: 'founding', 
+                university: '古吉拉特中央大学', 
+                englishUniversity: 'Central University of Gujarat',
+                country: '印度',
+                englishCountry: 'India',
+                englishCity: 'Ahmedabad'
+            },
+            { 
+                name: '印度尼西亚', 
+                city: '日惹', 
+                lng: 110.3643, 
+                lat: -7.7971, 
+                batch: 'founding', 
+                university: '日惹国立大学', 
+                englishUniversity: 'Gadjah Mada University',
+                country: '印度尼西亚',
+                englishCountry: 'Indonesia',
+                englishCity: 'Yogyakarta'
+            },
+            { 
+                name: '斯里兰卡', 
+                city: '科伦坡', 
+                lng: 79.8577, 
+                lat: 6.9271, 
+                batch: 'second', 
+                university: '斯里·贾耶瓦日德纳大学', 
+                englishUniversity: 'Sri Jayewardenepura University',
+                country: '斯里兰卡',
+                englishCountry: 'Sri Lanka',
+                englishCity: 'Colombo'
+            },
+            { 
+                name: '泰国', 
+                city: '清迈', 
+                lng: 98.9833, 
+                lat: 18.7883, 
+                batch: 'second', 
+                university: '清迈皇家大学', 
+                englishUniversity: 'Chiang Mai Rajabhat University',
+                country: '泰国',
+                englishCountry: 'Thailand',
+                englishCity: 'Chiang Mai'
+            },
+            { 
+                name: '越南', 
+                city: '河内', 
+                lng: 105.8412, 
+                lat: 21.0285, 
+                batch: 'second', 
+                university: '河内国家大学所属人文社科大学', 
+                englishUniversity: 'University of Social Sciences and Humanities, VNU',
+                country: '越南',
+                englishCountry: 'Vietnam',
+                englishCity: 'Hanoi'
+            },
+            
+            // China
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.4074, 
+                lat: 39.9042, 
+                batch: 'founding', 
+                university: '北京外国语大学', 
+                englishUniversity: 'Beijing Foreign Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.4321, 
+                lat: 39.9142, 
+                batch: 'founding', 
+                university: '北京第二外国语学院', 
+                englishUniversity: 'Beijing International Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.3596, 
+                lat: 39.9589, 
+                batch: 'founding', 
+                university: '北京语言大学', 
+                englishUniversity: 'Beijing Language and Culture University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.4663, 
+                lat: 39.9098, 
+                batch: 'founding', 
+                university: '对外经济贸易大学', 
+                englishUniversity: 'University of International Business and Economics',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.3331, 
+                lat: 40.0277, 
+                batch: 'founding', 
+                university: '国际关系学院', 
+                englishUniversity: 'University of International Relations',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.3219, 
+                lat: 39.9529, 
+                batch: 'founding', 
+                university: '外交学院', 
+                englishUniversity: 'China Foreign Affairs University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '北京', 
+                lng: 116.4448, 
+                lat: 39.9010, 
+                batch: 'third', 
+                university: '首都经济贸易大学', 
+                englishUniversity: 'Capital University of Economics and Business',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Beijing'
+            },
+            { 
+                name: '中国', 
+                city: '西安', 
+                lng: 108.9398, 
+                lat: 34.3416, 
+                batch: 'founding', 
+                university: '西安外国语大学', 
+                englishUniversity: 'Xi\'an International Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Xi\'an'
+            },
+            { 
+                name: '中国', 
+                city: '上海', 
+                lng: 121.5381, 
+                lat: 31.2359, 
+                batch: 'founding', 
+                university: '上海外国语大学', 
+                englishUniversity: 'Shanghai International Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Shanghai'
+            },
+            { 
+                name: '中国', 
+                city: '上海', 
+                lng: 121.4551, 
+                lat: 31.2218, 
+                batch: 'founding', 
+                university: '上海对外经贸大学', 
+                englishUniversity: 'Shanghai University of International Business and Economics',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Shanghai'
+            },
+            { 
+                name: '中国', 
+                city: '广州', 
+                lng: 113.2644, 
+                lat: 23.1291, 
+                batch: 'founding', 
+                university: '广东外语外贸大学', 
+                englishUniversity: 'Guangdong University of Foreign Studies',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Guangzhou'
+            },
+            { 
+                name: '中国', 
+                city: '长春', 
+                lng: 125.3245, 
+                lat: 43.8171, 
+                batch: 'second', 
+                university: '吉林外国语大学', 
+                englishUniversity: 'Jilin International Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Changchun'
+            },
+            { 
+                name: '中国', 
+                city: '大连', 
+                lng: 121.6147, 
+                lat: 38.9140, 
+                batch: 'founding', 
+                university: '大连外国语大学', 
+                englishUniversity: 'Dalian University of Foreign Languages',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Dalian'
+            },
+            { 
+                name: '中国', 
+                city: '重庆', 
+                lng: 106.5306, 
+                lat: 29.5630, 
+                batch: 'founding', 
+                university: '四川外国语大学', 
+                englishUniversity: 'Sichuan International Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Chongqing'
+            },
+            { 
+                name: '中国', 
+                city: '天津', 
+                lng: 117.2108, 
+                lat: 39.1422, 
+                batch: 'founding', 
+                university: '天津外国语大学', 
+                englishUniversity: 'Tianjin Foreign Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Tianjin'
+            },
+            { 
+                name: '中国', 
+                city: '杭州', 
+                lng: 120.1551, 
+                lat: 30.2741, 
+                batch: 'founding', 
+                university: '浙江外国语学院', 
+                englishUniversity: 'Zhejiang International Studies University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Hangzhou'
+            },
+            { 
+                name: '中国', 
+                city: '绍兴', 
+                lng: 120.5853, 
+                lat: 29.7186, 
+                batch: 'fourth', 
+                university: '浙江越秀外国语学院', 
+                englishUniversity: 'Zhejiang Yuexiu University of Foreign Languages',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Shaoxing'
+            },
+            { 
+                name: '中国', 
+                city: '金华', 
+                lng: 119.6462, 
+                lat: 29.1299, 
+                batch: 'third', 
+                university: '浙江师范大学', 
+                englishUniversity: 'Zhejiang Normal University',
+                country: '中国',
+                englishCountry: 'China',
+                englishCity: 'Jinhua'
+            },
+            
+            // South America
+            { 
+                name: '秘鲁', 
+                city: '利马', 
+                lng: -77.0369, 
+                lat: -12.0464, 
+                batch: 'founding', 
+                university: '利马大学', 
+                englishUniversity: 'University of Lima',
+                country: '秘鲁',
+                englishCountry: 'Peru',
+                englishCity: 'Lima'
+            },
+            { 
+                name: '墨西哥', 
+                city: '墨西哥城', 
+                lng: -99.1332, 
+                lat: 19.4326, 
+                batch: 'founding', 
+                university: '墨西哥国立自治大学', 
+                englishUniversity: 'National Autonomous University of Mexico',
+                country: '墨西哥',
+                englishCountry: 'Mexico',
+                englishCity: 'Mexico City'
+            },
+            { 
+                name: '智利', 
+                city: '圣地亚哥', 
+                lng: -70.6693, 
+                lat: -33.4489, 
+                batch: 'founding', 
+                university: '智利瓦尔帕莱索天主教大学', 
+                englishUniversity: 'Catholic University of Valparaíso',
+                country: '智利',
+                englishCountry: 'Chile',
+                englishCity: 'Santiago'
+            },
+            
+            // Africa
+            { 
+                name: '摩洛哥', 
+                city: '拉巴特', 
+                lng: -6.8498, 
+                lat: 34.0209, 
+                batch: 'founding', 
+                university: '穆罕默德五世大学', 
+                englishUniversity: 'Mohammed V University',
+                country: '摩洛哥',
+                englishCountry: 'Morocco',
+                englishCity: 'Rabat'
+            },
+            { 
+                name: '乌干达', 
+                city: '坎帕拉', 
+                lng: 32.5822, 
+                lat: 0.3476, 
+                batch: 'fourth', 
+                university: '麦克雷雷大学', 
+                englishUniversity: 'Makerere University',
+                country: '乌干达',
+                englishCountry: 'Uganda',
+                englishCity: 'Kampala'
+            }
+        ];
+        
+        // Baidu Maps Initialization
+        function initBaiduMap() {
+            // Create map instance
+            const map = new BMap.Map('baiduMap', {
+                minZoom: 2,
+                maxZoom: 18
+            });
+            
+            // Set map center and zoom level
+            const centerPoint = new BMap.Point(95.0, 35.0); // Centered on Asia
+            map.centerAndZoom(centerPoint, 3);
+            
+            // Enable map controls
+            map.enableScrollWheelZoom(); // Enable scroll wheel zoom
+            map.enableKeyboard(); // Enable keyboard controls
+            map.enableDragging(); // Enable dragging
+            map.enableDoubleClickZoom(); // Enable double click zoom
+            
+            // Add navigation control
+            const navControl = new BMap.NavigationControl({
+                anchor: BMAP_ANCHOR_TOP_LEFT,
+                type: BMAP_NAVIGATION_CONTROL_LARGE
+            });
+            map.addControl(navControl);
+            
+            // Add scale control
+            const scaleControl = new BMap.ScaleControl({
+                anchor: BMAP_ANCHOR_BOTTOM_LEFT
+            });
+            map.addControl(scaleControl);
+            
+            // Add overview map control
+            const overviewControl = new BMap.OverviewMapControl({
+                anchor: BMAP_ANCHOR_BOTTOM_RIGHT,
+                isOpen: true
+            });
+            map.addControl(overviewControl);
+            
+            // Create an info window instance
+            const infoWindow = new BMap.InfoWindow('', {
+                offset: new BMap.Size(0, -10),
+                enableAutoPan: true
+            });
+            
+            // Function to get marker color based on batch (matches legend colors)
+            function getMarkerColor(batch) {
+                switch (batch) {
+                    case 'founding':
+                        return '#4f46e5'; // Indigo 600
+                    case 'second':
+                        return '#a855f7'; // Purple 500
+                    case 'third':
+                        return '#3b82f6'; // Blue 500
+                    case 'fourth':
+                        return '#f97316'; // Orange 500
+                    default:
+                        return '#6b7280'; // Gray 500
+                }
+            }
+            
+            // Function to get batch name based on current language
+            function getBatchName(batch) {
+                // Get current language from active button
+                const activeLangBtn = document.querySelector('.lang-btn.bg-white');
+                const currentLang = activeLangBtn ? (activeLangBtn.textContent.trim() === '中文' ? 'zh' : 'en') : 'zh';
+                
+                const batchMap = {
+                    zh: {
+                        'founding': '初创成员',
+                        'second': '第二批成员',
+                        'third': '第三批成员',
+                        'fourth': '第四批成员'
+                    },
+                    en: {
+                        'founding': 'Founding Members',
+                        'second': 'Second Batch Members',
+                        'third': 'Third Batch Members',
+                        'fourth': 'Fourth Batch Members'
+                    }
+                };
+                
+                return batchMap[currentLang][batch] || batch;
+            }
+            
+
+            
+            // Function to create custom marker icon
+            function createMarkerIcon(color) {
+                const svg = `<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'><circle cx='12' cy='12' r='10' fill='${color}' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></circle><path d='M12 8v8' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path><path d='M8 12h8' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'></path></svg>`;
+                const iconUrl = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
+                
+                return new BMap.Icon(iconUrl, new BMap.Size(24, 24), {
+                    anchor: new BMap.Size(12, 12),
+                    imageSize: new BMap.Size(24, 24)
+                });
+            }
+            
+            // Add markers for each university
+            memberLocations.forEach(location => {
+                // Create point
+                const point = new BMap.Point(location.lng, location.lat);
+                
+                // Get current language
+                const activeLangBtn = document.querySelector('.lang-btn.bg-white');
+                const currentLang = activeLangBtn ? (activeLangBtn.textContent.trim() === '中文' ? 'zh' : 'en') : 'zh';
+                
+                // Choose appropriate names based on language
+                const displayUniversity = currentLang === 'zh' ? location.university : location.englishUniversity;
+                const displayCountry = currentLang === 'zh' ? location.country : location.englishCountry;
+                const displayCity = currentLang === 'zh' ? location.city : location.englishCity;
+                
+                // Create custom marker with color based on batch
+                const marker = new BMap.Marker(point, {
+                    icon: createMarkerIcon(getMarkerColor(location.batch)),
+                    title: `${displayUniversity} - ${displayCountry} ${displayCity}`
+                });
+                
+                // Add marker to map
+                map.addOverlay(marker);
+                
+                // Add click event for info window
+                marker.addEventListener('click', function() {
+                    // Get updated language (might have changed since marker creation)
+                    const currentLang = document.querySelector('.lang-btn.bg-white') ? 
+                        (document.querySelector('.lang-btn.bg-white').textContent.trim() === '中文' ? 'zh' : 'en') : 'zh';
+                    
+                    const batchLabel = currentLang === 'zh' ? '批次：' : 'Batch: ';
+                    const locationLabel = currentLang === 'zh' ? '所在地：' : 'Location: ';
+                    
+                    // Choose appropriate names for info window
+                    const infoUniversity = currentLang === 'zh' ? location.university : location.englishUniversity;
+                    const infoCountry = currentLang === 'zh' ? location.country : location.englishCountry;
+                    const infoCity = currentLang === 'zh' ? location.city : location.englishCity;
+                    
+                    const content = `
+                        <div style="padding: 15px; min-width: 200px;">
+                            <h3 style="margin: 0 0 8px 0; font-size: 18px; color: #4f46e5; font-weight: bold;">${infoUniversity}</h3>
+                            <div style="margin: 8px 0; border-bottom: 1px solid #e5e7eb;"></div>
+                            <p style="margin: 0 0 5px 0; font-size: 14px; color: #374151;">
+                                <strong>${locationLabel}</strong>${infoCountry} ${infoCity}
+                            </p>
+                            <p style="margin: 5px 0 0 0; font-size: 14px; color: #374151;">
+                                <strong>${batchLabel}</strong>${getBatchName(location.batch)}
+                            </p>
+                        </div>
+                    `;
+                    infoWindow.setContent(content);
+                    map.openInfoWindow(infoWindow, point);
+                });
+            });
+        }
+    </script>
+<!-- Back to Top Button -->
+<button id="backToTop" class="fixed bottom-6 right-6 bg-indigo-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-indigo-700 transition-all opacity-0 invisible">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Save scroll position functionality -->
+<script>
+// Save scroll position when leaving the page
+window.addEventListener('beforeunload', function() {
+    localStorage.setItem('membersPageScrollY', window.scrollY);
+});
+
+// Restore scroll position when returning to the page
+window.addEventListener('load', function() {
+    const savedScroll = localStorage.getItem('membersPageScrollY');
+    if (savedScroll !== null) {
+        window.scrollTo(0, parseInt(savedScroll));
+        // Clear the saved position after restoring
+        localStorage.removeItem('membersPageScrollY');
+    }
+});
+
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+    } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+    }
+});
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+</script>
+</body>
+</html>

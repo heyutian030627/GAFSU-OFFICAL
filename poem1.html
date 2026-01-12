@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>新闻详情 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // 移动下拉菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有移动下拉菜单
+            const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+            
+            // 为每个下拉菜单添加点击事件
+            mobileDropdowns.forEach(dropdown => {
+                const toggleButton = dropdown.querySelector('.mobile-dropdown-toggle');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                const icon = toggleButton.querySelector('i');
+                
+                toggleButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 切换菜单显示
+                    menu.classList.toggle('hidden');
+                    
+                    // 切换图标旋转
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Hero background decoration */
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23ffffff" fill-opacity="0.05" fill-rule="evenodd"/%3E%3C/svg%3E');
+        }
+        
+        /* Hero decoration elements */
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        /* Ensure hero content is above decorations */
+        .hero-gradient > .content-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Hero title styles */
+        .hero-gradient h1 {
+            @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-4;
+            color: white;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            letter-spacing: -0.03em;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+        
+        /* Responsive hero title */
+        @media (max-width: 768px) {
+            .hero-gradient h1 {
+                font-size: 2.25rem;
+                line-height: 1.25;
+            }
+        }
+    
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+      
+        /* Content container */
+        .content-container {
+            @apply max-w-7xl mx-auto px-6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .region-section {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            h4 {
+                font-size: 1.25rem;
+            }
+            h5 {
+                font-size: 1rem;
+            }
+        }
+        /* Navigation styles */
+        /* 统一导航栏链接样式 */
+            @apply transition-all duration-200;
+        
+    /* 统一导航栏链接样式 */
+
+/* 移动导航链接样式 */
+/* 统一导航栏链接样式 */
+.nav-link {
+    @apply text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    @apply text-blue-400;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* 移动导航链接样式 */
+.mobile-nav-link {
+    @apply block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-blue-600/20 transition-all duration-300;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.mobile-nav-link.active {
+    @apply bg-blue-600/20 text-blue-400;
+}
+/* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 shadow-lg overflow-visible relative">
+        <!-- Tech Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_80%,rgba(102,126,234,0.15)_0%,transparent_50%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_0%,rgba(102,126,234,0.05)_50%,transparent_100%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <!-- Animated Grid Lines -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg_width=\"100\"_height=\"100\"_viewBox=\"0_0_100_100\"_xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath_d=\"M11_18c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm48_25c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm-43-7c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm63_31c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM34_90c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm56-76c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM12_86c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm28-65c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm23-11c2.76_0_5-2.24_5-5s-2.24-5-5-5-5_2.24-5_5_2.24_5_5_5zm-6 60c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm29 22c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zM32 63c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm57-13c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm-9-21c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM60 91c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM35 41c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM12 60c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2z"_fill="%23667eea"_fill-opacity="0.08"_fill-rule="evenodd"/%3E%3C/svg%3E') opacity-20"></div>
+        </div>
+        <div class="max-w-none mx-auto px-2 sm:px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center group">
+                        <div class="w-16 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40">
+                            <span class="text-white font-bold text-base tracking-wider">GAFSU</span>
+                        </div>
+                        <span class="ml-2 text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hidden md:inline transition-all duration-300 group-hover:opacity-100">
+                            <span data-lang="zh">全球外国语大学联盟</span>
+                            <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden min-[1838px]:flex items-center space-x-1">
+                    <!-- Search Bar -->
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="搜索..." class="bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 w-48 hover:w-64">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-8">
+                        <!-- Chinese Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="zh">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                首页
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                关于我们
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟成员
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟发展历程
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- 联盟活动下拉菜单 -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative flex items-center">
+                                    联盟活动
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                                </a>
+                                <!-- 下拉菜单内容 -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="zh"></div>
+                        
+                        <!-- English Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="en">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Home
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                About Us
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Member Universities
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Alliance History
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- Alliance Activities Dropdown -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative flex items-center">
+                                    Alliance Activities
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                                </a>
+                                <!-- Dropdown Menu Content -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="en"></div>
+                        
+                        <!-- Language Switcher -->
+                        <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-blue-500/30">
+                            <button id="langZh" class="lang-btn px-4 py-1.5 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30">中文</button>
+                            <button id="langEn" class="lang-btn px-4 py-1.5 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="min-[1838px]:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-blue-500/30 text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="min-[1838px]:hidden mobile-menu hidden bg-gray-900/95 backdrop-blur-lg border-t border-blue-500/30 transition-all duration-500 relative z-10">
+            <div class="px-2 pt-4 pb-6 space-y-3 sm:px-3">
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <input type="text" placeholder="搜索..." class="w-full bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- Chinese Navigation -->
+                <div data-lang="zh">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">首页</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">关于我们</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟成员</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟发展历程</a>
+                    
+                    <!-- 联盟活动移动下拉菜单 -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500 flex items-center justify-between">
+                            联盟活动
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- 下拉菜单内容 -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English Navigation -->
+                <div data-lang="en" class="hidden">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Home</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">About Us</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Member Universities</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Alliance History</a>
+                    
+                    <!-- Alliance Activities Mobile Dropdown -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500 flex items-center justify-between">
+                            Alliance Activities
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- Dropdown Menu Content -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Language Switcher -->
+                <div class="border-t border-blue-500/30 pt-4 mt-4">
+                    <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 mx-3">
+                        <button id="mobileLangZh" class="lang-btn w-full px-4 py-2 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700">中文</button>
+                        <button id="mobileLangEn" class="lang-btn w-full px-4 py-2 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="content-container">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-4 flex items-center space-x-3 text-sm opacity-90">
+                    <!-- Chinese Version -->
+                    <div data-lang="zh">
+                        <a href="index.html" class="hover:text-blue-300 transition-colors duration-200">首页</a>
+                        <span>›</span>
+                        <span>联盟活动</span>
+                        <span>›</span>
+                        <a href="poemcontest.html" class="hover:text-blue-300 transition-colors duration-200">三行诗大赛</a>
+                        <span>›</span>
+                        <span>新闻详情</span>
+                    </div>
+                    <!-- English Version -->
+                    <div data-lang="en" class="hidden">
+                        <a href="index.html" class="hover:text-blue-300 transition-colors duration-200">Home</a>
+                        <span>›</span>
+                        <span>Alliance Activities</span>
+                        <span>›</span>
+                        <a href="poemcontest.html" class="hover:text-blue-300 transition-colors duration-200">Tristich Contest</a>
+                        <span>›</span>
+                        <span>News Details</span>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" data-lang="zh">GATRICO 2022三行诗大赛即日起正式启动！</h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight hidden" data-lang="en">GATRICO 2022 Tristich Contest Officially Launched Today!</h1>
+                
+                <div class="flex flex-wrap items-center gap-4 text-sm opacity-90">
+                    <div class="flex items-center">
+                        <i class="far fa-calendar mr-2"></i>
+                        <span data-lang="zh">2021年12月31日</span>
+                        <span data-lang="en" class="hidden">December 31, 2021</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-user mr-2"></i>
+                        <span data-lang="zh">GAFSU秘书处</span>
+                        <span data-lang="en" class="hidden">GAFSU Secretariat</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-eye mr-2"></i>
+                        <span>1,234</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Content Section -->
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <!-- Featured Image -->
+                <div class="mb-12">
+                    <div class="relative overflow-hidden rounded-xl shadow-2xl group">
+                        <img 
+                            src="pic/poemcontest/3.jpg" 
+                            alt="国际学术研讨会现场" 
+                            class="w-full h-auto object-contain"
+                            loading="lazy"
+                        />
+                       
+                        <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-6">
+                            <p class="text-white text-sm" data-lang="zh">GATRICO 第一届三行诗大赛邀请函</p>
+                            <p class="text-white text-sm hidden" data-lang="en">The 1st GAFSU GATRICO Tristich Contest Invitation</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Insert New Photo Below -->
+                <div class="mb-12">
+                    <div class="w-full">
+                        <img 
+                            src="pic/poemcontest/2.jpg" 
+                            alt="全球外国语大学联盟第一届三行诗大赛" 
+                            class="w-full h-auto"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+
+                <!-- News Content -->
+                <div class="prose prose-lg max-w-none">
+                    <div data-lang="zh">
+                        <h2 class="text-2xl font-bold mb-6 section-header">GATRICO 2022三行诗大赛即日起正式启动！</h2>
+                                               
+                        <h3 class="text-xl font-bold mb-4 mt-10">大赛主旨</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">鼓励文化交流，促进语言多样性</p>
+                                               
+                        <h3 class="text-xl font-bold mb-4 mt-10">大赛主题</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">或许你曾憧憬成为“unique”的存在，又或许你曾畅想拥抱“unlimited”的未来，又或许你曾期望创造“unprecedented”的功业……“</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">“We unite the world and prefer a world with U, along with your own stories.”请以U开头的字母为线索，发起头脑风暴，大胆进行你的创作吧！——没有什么，能够比将你丰富的哲思在短短的三行诗里表达更富挑战与浪漫气息了。在这个用文学构建的舞台，我们期待着你的精彩作品！</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">语言</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">不限 （为便于交流，非中英投稿可提供英文参考译文）</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">截稿日期</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">2022年11月15日</p>
+                        
+                        <h3 class="text-xl font-bold mb-4 mt-10">获奖名单公布</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">2022年12月31日</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">参赛方式</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">请先填写报名表（见文末“阅读原文”按钮）,并在截稿日期前将表格和参赛作品以附件的形式发送到gafsu@bfsu.edu.cn。</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">参赛范围</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">所有GAFSU成员高校的学生均可参赛。每位参赛者只可提交1首三行诗作品且只能获得一个奖项。</p>
+                        
+                        <h3 class="text-xl font-bold mb-4 mt-10">基本要求</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">字数限制：参赛作品应不超过100字</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">文件格式：.docx格式</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">文件命名：参赛者全名-三行诗题目-U开头的线索词汇-参赛者所属大学。例如：杨艾米-爱-Unique-北京外国语大学。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">请填写英文版或中文版报名表，并在表中阐述U开头的线索词汇。</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">奖项设置</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">大赛设有：</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">特等奖1名</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">优秀奖2-4名</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">特别奖3-5名</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">参与奖5-10名</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">最佳组织奖3-5名</p>
+
+                        <p class="mb-6 text-lg leading-relaxed">所有获奖者将获得证书及奖牌，获奖作品将在《全球外国语大学联盟电子期刊》刊登。</p>
+                    </div>
+                    
+                    <div data-lang="en" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6 section-header">The 1st GAFSU Tristich Contest</h2>
+                                                
+                        <h3 class="text-xl font-bold mb-4 mt-10">AIM</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">To encourage cultural exchanges and promote linguistic diversity</p>
+                        
+                        <h3 class="text-xl font-bold mb-4 mt-10">THEME</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">You may have promised to be a Unique person, embrace the Unlimited future, or craft an Unprecedented career.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">"We unite the world and prefer a world with U,along with your own stories."You may use a word that starts with U as a lead to create a tristich. Nothing is more romantic and challenging than expressing your philosophy and idea in one triplet. We look forward to your excellent work.</p>
+
+                       <h3 class="text-xl font-bold mb-4 mt-10">LANGUAGE</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">Any language (preferably with a gloss version in English for communication purpose)</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">SUBMISSION DUE DATE</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">November 15th, 2022</p>
+
+                        <h3 class="text-xl font-bold mb-4 mt-10">ANNOUNCEMENT OF WINNERS</h3>
+                        
+                        <p class="mb-6 text-lg leading-relaxed">December 31st, 2022</p>
+                       
+                        <h3 class="text-xl font-bold mb-4 mt-10">HOW TO PARTICIPATE</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">First fill out the attached form(the "Read more" button at the end of the article), and then send the form(s) and work(s) of the contestant(s) as attachments to gafsu@bfsu.edu.cn before the submission due.</p>               
+        
+                        <h3 class="text-xl font-bold mb-4 mt-10">ELIGIBILITY</h3>
+
+                        <p class="mb-6 text-lg leading-relaxed">Students from GAFSU Member Universities. Each contestant can submit only one triplet, and can be awarded only one prize.</p>
+
+                       <h3 class="text-xl font-bold mb-4 mt-10"> BASIC REQUIREMENTS</h3>
+                       
+                       <p class="mb-12 text-lg leading-relaxed">Each work shall be no more than 100 words.</p>
+                       
+                       <p class="mb-12 text-lg leading-relaxed">The file shall be in .docx format.</p>
+                       
+                       <p class="mb-12 text-lg leading-relaxed">Format for the file name: contestant's full name-title of the tristich-the U-word-contestant's university. e.g., Amy Young-Love-Unique–BFSU</p>
+
+                       <p class="mb-12 text-lg leading-relaxed">Please fill out the entry form in English and explain your U-word lead.</p>
+
+                       <h3 class="text-xl font-bold mb-4 mt-10">PRIZES & PRIVILEGES</h3>
+                       
+                       <p class="mb-12 text-lg leading-relaxed">For prizes-</p>
+
+                       <p class="mb-12 text-lg leading-relaxed">Grand Prize: 1 awardee</p>
+                       <p class="mb-12 text-lg leading-relaxed">Award of Excellence: 2-4 awardees</p>
+                       <p class="mb-12 text-lg leading-relaxed">Award of Special Selection: 3-5 awardees</p>
+                       <p class="mb-12 text-lg leading-relaxed">Award of Selection: 5-10 awardees</p>
+                       <p class="mb-12 text-lg leading-relaxed">Award of Selection: 5-10 awardees</p>
+                       <p class="mb-12 text-lg leading-relaxed">Award of Outstanding Co-organizer: 3-5 Member Universities</p>
+
+                       <p class="mb-12 text-lg leading-relaxed">All winners will receive a certificate and a medal, and their works will be posted in the GAFSU Newsletter.</p>
+
+                    </div>
+                </div>
+                
+                <!-- Article Meta -->
+                <div class="pt-8 border-t border-gray-200">
+                    <div class="flex flex-wrap items-center justify-between gap-4 text-sm text-gray-600">
+                        <div class="flex items-center gap-2">
+                            <span data-lang="zh">标签：</span>
+                            <span data-lang="en" class="hidden">Tags:</span>
+                            <a href="#" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors duration-200" data-lang="zh">联盟活动</a>
+                            <a href="#" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors duration-200 hidden" data-lang="en">Alliance Activities</a>
+                            <a href="#" class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full hover:bg-purple-200 transition-colors duration-200" data-lang="zh">三行诗大赛</a>
+                            <a href="#" class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full hover:bg-purple-200 transition-colors duration-200 hidden" data-lang="en">Tristich Contest</a>
+                            <a href="#" class="px-3 py-1 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors duration-200" data-lang="zh">语言教育</a>
+                            <a href="#" class="px-3 py-1 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors duration-200 hidden" data-lang="en">Language Education</a>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <span data-lang="zh">分享：</span>
+                            <span data-lang="en" class="hidden">Share:</span>
+                            <div class="flex items-center gap-2">
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 hover:text-blue-800 transition-colors duration-200">
+                                    <i class="fab fa-weixin"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-200 hover:text-red-800 transition-colors duration-200">
+                                    <i class="fab fa-weibo"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition-colors duration-200">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related News -->
+                <div class="mt-16 mb-16">
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header" data-lang="zh">相关新闻</h3>
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header hidden" data-lang="en">Related News</h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Related News Item -->
+                        <a href="poem2.html" class="block bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div class="h-48 overflow-hidden">
+                                <img 
+                                    src="pic/poemcontest/1.jpg" 
+                                    alt="相关新闻" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                            </div>
+                            <div class="p-6">
+                                <div class="text-xs text-gray-500 mb-2">2022-07-12</div>
+                                <h4 class="text-lg font-bold mb-3 line-clamp-2">
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200" data-lang="zh">全球外国语大学联盟 第一届世界大学生三行诗大赛在北外举办</span>
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200 hidden" data-lang="en">GATRICO 2022 Tristich Contest Held at BFSU</span>
+                                </h4>
+                                <p class="text-sm text-gray-600 line-clamp-3" data-lang="zh">获奖结果 GATRICO 2022——全球外国语大学联盟第一届世界大学生三行诗大赛成功举办，本次大赛以“World with U”为主题，鼓励参赛者以U开头的字母为线索，创作多语三行诗。比赛旨在增进全球外国语大学联盟高校交流，提高学生情感修养，丰富校园文化生活。</p>
+                                <p class="text-sm text-gray-600 line-clamp-3 hidden" data-lang="en">WINNERS GATRICO 2022 - The first GAFSU Tristich Contest was successfully held by the Global Alliance of Foreign Studies Universities. With the theme of "World with U", participants were encouraged to compose multilingual triplets using the letters starting with U as clues. The competition aims to deepen communication among universities in the Global Alliance of Foreign Studies Universities, enhance students' cultivation, and enrich their campus life.</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="content-container text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Language Switching
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+                
+                // Update language button states
+                const langButtons = document.querySelectorAll('.lang-btn');
+                langButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-800/50', 'text-gray-300');
+                });
+                
+                // Highlight the active language button
+                const activeButtons = document.querySelectorAll(`#lang${lang === 'zh' ? 'Zh' : 'En'}, #mobileLang${lang === 'zh' ? 'Zh' : 'En'}`);
+                activeButtons.forEach(btn => {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('bg-gray-800/50', 'text-gray-300');
+                });
+            }
+            
+            const langZhButtons = document.querySelectorAll('#langZh, #mobileLangZh');
+            const langEnButtons = document.querySelectorAll('#langEn, #mobileLangEn');
+            
+            langZhButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('zh'));
+            });
+            
+            langEnButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('en'));
+            });
+            
+            // Initialize with saved language or default to Chinese
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+
+    </script>
+<!-- Back to Top Button -->
+<button id="backToTop" class="fixed bottom-6 right-6 bg-indigo-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-indigo-700 transition-all opacity-0 invisible">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Save scroll position functionality -->
+<script>
+
+
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+    } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+    }
+});
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+</script>
+</body>
+</html>

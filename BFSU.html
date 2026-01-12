@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>北京外国语大学 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        /* University logo circular frame */
+        .university-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .university-logo:hover {
+            transform: scale(1.05);
+        }
+        /* Info card styles */
+        .info-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        /* Back button styles */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn:hover {
+            background-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .back-btn svg {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover svg {
+            transform: translateX(-2px);
+        }
+        
+        /* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">北京外国语大学</h1>
+            <p class="text-xl opacity-90"></p>
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <section class="py-4 px-4 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <a href="index.html" class="back-btn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                返回首页
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- University Logo and Basic Info -->
+            <div class="flex flex-col items-center mb-12">
+                <img src="pic/logo/BFSU.jpg" alt="北京外国语大学 Logo" class="university-logo mb-8">
+                
+                <div class="info-card w-full max-w-3xl">
+                    <!-- Chinese Version -->
+                    <div data-lang="zh">
+                        <h2 class="text-2xl font-bold mb-6 section-header">基本信息</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3"><strong>学校名称：</strong>北京外国语大学</p>
+                                <p class="mb-3"><strong>所属国家：</strong>中国</p>
+                                <p class="mb-3"><strong>所在城市：</strong>北京</p>
+                                <p class="mb-3"><strong>加入批次：</strong>创始成员</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><strong>英文名称：</strong>Beijing Foreign Studies University</p>
+                                <p class="mb-3"><strong>学校类型：</strong>外国语大学</p>
+                                <p class="mb-3"><strong>联盟成员状态：</strong>正式成员</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- English Version -->
+                    <div data-lang="en" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6 section-header">Basic Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3"><strong>University Name：</strong>Beijing Foreign Studies University</p>
+                                <p class="mb-3"><strong>Country：</strong>China</p>
+                                <p class="mb-3"><strong>City：</strong>Beijing</p>
+                                <p class="mb-3"><strong>Join Batch：</strong>Founding Member</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><strong>Chinese Name：</strong>北京外国语大学</p>
+                                <p class="mb-3"><strong>Type：</strong>Foreign Studies University</p>
+                                <p class="mb-3"><strong>Membership Status：</strong>Full Member</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- School Introduction -->
+            <div class="info-card mb-12">
+                <!-- Chinese Version -->
+                <div data-lang="zh">
+                    <h2 class="text-2xl font-bold mb-6 section-header">学校简介</h2>
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+                        北京外国语大学（Beijing Foreign Studies University），简称“北外”，位于北京市海淀区，是由国家举办、中华人民共和国教育部主管的全日制普通高等学校，为首批“211工程”高校、“985”优势学科创新平台高校、首批“双一流”建设高校、财政部6所“小规模试点高校“之一，国际大学翻译学院联合会、京港大学联盟、中英高等教育人文联盟、中日人文交流大学联盟、延河高校人才培养联盟、中俄综合性大学联盟成员，入选“2011计划”、国家建设高水平大学公派研究生项目、国家大学生文化素质教育基地。
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+                        学校肇始于1941年成立于延安的中国人民抗日军政大学三分校俄文队，后历经军委俄文学校、延安外国语学校、华北联合大学外国语学院、中央外事学校等主要阶段，1949年发展成为北京外国语学校；1954年，经国务院批准成立北京外国语学院；1959年，北京外国语学院与北京俄语学院合并，组建新的北京外国语学院；1981年11月，获批硕士、博士学位授权点，成为中国首批具有硕士、博士学位授予权单位之一；1994年，更名为北京外国语大学。
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+                        据2024年11月学校官网，学校拥有东、西两个校区，下设30个教学单位，共开设121个本科专业，一级学科博士学位授权点2个，一级学科硕士学位授权点11个，专业硕士学位授权类别8个；在职在编教职工1300余人，本科在校生5700余人，研究生3900余人，国际学生1300余人。图书馆藏有纸质中外文图书近157万册，中外文电子图书216万余册，中外文报刊1081种，中外文数据库107个。
+                    </div>
+                </div>
+                
+                <!-- English Version -->
+                <div data-lang="en" class="hidden">
+                    <h2 class="text-2xl font-bold mb-6 section-header">About the University</h2>
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+                         Beijing Foreign Studies University (BFSU), is located in Haidian District, Beijing. It is a full-time public institution of higher education administered by the Ministry of Education of the People’s Republic of China. BFSU is among the first group of universities under the “Project 211,” a recipient of the “985 Advantageous Discipline Innovation Platform,” one of the first institutions selected for the “Double First-Class” initiative, and one of the six small-scale pilot universities supported by the Ministry of Finance. It is a member of the International Association of University Translation Institutes, the Beijing–Hong Kong Universities Alliance, the China–UK Humanities Alliance for Higher Education, the China–Japan Humanities Exchange University Alliance, the Yanhe University Talent Development Alliance, and the China–Russia Comprehensive University Alliance. BFSU has also been selected for the “2011 Plan,” the National Government-Sponsored Graduate Program for Building World-Class Universities, and the National Base for Cultural Quality Education for College Students.
+
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+                         The University traces its origins to the Russian Language Unit of the Third Branch of the Chinese People’s Anti-Japanese Military and Political University, established in Yan’an in 1941. It subsequently evolved through several key stages, including the Military Commission Russian Language School, the Yan’an School of Foreign Languages, the School of Foreign Languages of North China United University, and the Central School of Foreign Affairs. In 1949, it developed into the Beijing School of Foreign Languages. In 1954, with approval from the State Council, it was formally established as the Beijing Institute of Foreign Languages. In 1959, it merged with the Beijing Russian Language Institute to form a new Beijing Institute of Foreign Languages. In November 1981, the University was authorized to confer master’s and doctoral degrees, becoming one of the first institutions in China with such degree-granting authority. In 1994, it was officially renamed Beijing Foreign Studies University.
+
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+According to the University’s official website as of November 2024, BFSU operates two campuses (East and West) and comprises 30 teaching units, offering 121 undergraduate programs. It holds authorization for two first-level doctoral degree programs, 11 first-level master’s degree programs, and eight categories of professional master’s degrees. The University has more than 1,300 full-time faculty and staff, with over 5,700 undergraduate students, 3,900 graduate students, and 1,300 international students enrolled. The University library houses nearly 1.57 million volumes of printed Chinese and foreign-language books, more than 2.16 million Chinese and foreign-language e-books, 1,081 Chinese and foreign-language periodicals, and 107 Chinese and foreign-language databases.
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language Switching Functionality
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                // Hide all elements with data-lang attribute
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Show only elements with the selected language
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+            }
+            
+            // Check if there's a saved language preference
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+    </script>
+</body>
+</html>

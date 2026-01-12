@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>北京外国语大学 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        /* University logo circular frame */
+        .university-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .university-logo:hover {
+            transform: scale(1.05);
+        }
+        /* Info card styles */
+        .info-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        /* Back button styles */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn:hover {
+            background-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .back-btn svg {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover svg {
+            transform: translateX(-2px);
+        }
+        
+        /* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">北京外国语大学</h1>
+            <p class="text-xl opacity-90"></p>
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <section class="py-4 px-4 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <a href="index.html" class="back-btn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                返回首页
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- University Logo and Basic Info -->
+            <div class="flex flex-col items-center mb-12">
+                <img src="pic/logo/HUFS.jpg" alt="东京外国语大学Logo" class="university-logo mb-8">
+                
+                <div class="info-card w-full max-w-3xl">
+                    <!-- Chinese Version -->
+                    <div data-lang="zh">
+                        <h2 class="text-2xl font-bold mb-6 section-header">基本信息</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3"><strong>学校名称：</strong>韩国外国语大学</p>
+                                <p class="mb-3"><strong>所属国家：</strong>韩国</p>
+                                <p class="mb-3"><strong>所在城市：</strong>首尔</p>
+                                <p class="mb-3"><strong>加入批次：</strong>创始成员</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><strong>英文名称：</strong>Hankuk University of Foreign Studies</p>
+                                <p class="mb-3"><strong>学校类型：</strong>外国语大学</p>
+                                <p class="mb-3"><strong>联盟成员状态：</strong>正式成员</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- English Version -->
+                    <div data-lang="en" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6 section-header">Basic Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3"><strong>University Name：</strong>Hankuk University of Foreign Studies</p>
+                                <p class="mb-3"><strong>Country：</strong>Korea</p>
+                                <p class="mb-3"><strong>City：</strong>Seoul</p>
+                                <p class="mb-3"><strong>Join Batch：</strong>Founding Member</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><strong>Chinese Name：</strong>韩国外国语大学</p>
+                                <p class="mb-3"><strong>Type：</strong>Foreign Studies University</p>
+                                <p class="mb-3"><strong>Membership Status：</strong>Full Member</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- School Introduction -->
+            <div class="info-card mb-12">
+                <!-- Chinese Version -->
+                <div data-lang="zh">
+                    <h2 class="text-2xl font-bold mb-6 section-header">学校简介</h2>
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+韩国外国语大学（한국외국어대학교，Hankuk University of Foreign Studies），简称“韩国外大”，由韩国政府创办于1954年，是韩国以外语为特色的综合类大学，也是韩国最早的外语教育机构之一，是世界语言学教育领域最顶尖的大学之一，被誉为“亚洲翻译家的摇篮”。学校是“亚洲校园”、国际大学翻译学院联合会、丝绸之路大学联盟、全球外国语大学联盟成员。                    
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+韩国外国语大学拥有2个校区、9个研究生院和18个学院，开设45门外语专业，约有17074名本科生、4166名研究生和博士生，设有17个综合学院，共76个单科学系。学校与世界87个国家和地区的522所院校及教育机构建立了姐妹院校合作关系。                  
+                   </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+韩国外国语大学为学生提供在大韩贸易投资振兴公社、外交部以及海外公共机构实习的机会，并与联合国和平大学合作开设硕士课程。                    
+                    </div>
+
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+在国际排名方面，韩国外国语大学在QS现代语言学领域位列全球第28位，连续多年位居QS亚洲大学排行榜外语类高校第一名，在QS亚洲高校无医学类综合大学排名中位列亚洲第八位（韩国国内排名第一），连续十年被评为韩国国际化程度最高的大学。2025年QS世界大学排名位于651—660区间。                    
+                    </div>
+                </div>
+                
+                <!-- English Version -->
+                <div data-lang="en" class="hidden">
+                    <h2 class="text-2xl font-bold mb-6 section-header">About the University</h2>
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+Hankuk University of Foreign Studies (Korean: 한국외국어대학교), abbreviated as HUFS, was founded by the South Korean government in 1954. It is a comprehensive university with a strong focus on foreign languages and is one of the earliest institutions for foreign language education in South Korea. Recognized as one of the world’s leading universities in the field of linguistics, it is often hailed as the "Cradle of Asian Translators." HUFS is a member of the Asian Campus, the Confédération Internationale des Universités Traductrices et Interprètes (CIUTI), the Silk Road University Alliance, and the Global Alliance of Foreign Language Universities.
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+HUFS has two campuses, nine graduate schools, and eighteen colleges, offering 45 foreign language majors. The university has approximately 17,074 undergraduate students and 4,166 graduate and doctoral students, organized across 17 comprehensive colleges and 76 individual departments. It has established sister-school and cooperative relationships with 522 institutions in 87 countries and regions worldwide.
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">
+In international rankings, HUFS is ranked 28th globally in modern linguistics by QS, has consistently held the top position among foreign language universities in the QS Asia University Rankings, and is ranked 8th in Asia among comprehensive Asian universities without medical schools (first in South Korea). It has been recognized as the most internationalized university in South Korea for ten consecutive years. In the 2025 QS World University Rankings, HUFS is placed in the 651–660 range.
+                    </div>
+                </div>
+            </div>
+            
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language Switching Functionality
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                // Hide all elements with data-lang attribute
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Show only elements with the selected language
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+            }
+            
+            // Check if there's a saved language preference
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+    </script>
+</body>
+</html>

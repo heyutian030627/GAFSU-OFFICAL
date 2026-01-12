@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>新闻详情 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <script>
+        // 移动下拉菜单功能
+        document.addEventListener('DOMContentLoaded', function() {
+            // 获取所有移动下拉菜单
+            const mobileDropdowns = document.querySelectorAll('.mobile-dropdown');
+            
+            // 为每个下拉菜单添加点击事件
+            mobileDropdowns.forEach(dropdown => { 
+                const toggleButton = dropdown.querySelector('.mobile-dropdown-toggle');
+                const menu = dropdown.querySelector('.mobile-dropdown-menu');
+                const icon = toggleButton.querySelector('i');
+                
+                toggleButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 切换菜单显示
+                    menu.classList.toggle('hidden');
+                    
+                    // 切换图标旋转
+                    icon.classList.toggle('rotate-180');
+                });
+            });
+        });
+    </script>
+
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Hero background decoration */
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Cpath d="M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z" fill="%23ffffff" fill-opacity="0.05" fill-rule="evenodd"/%3E%3C/svg%3E');
+        }
+        
+        /* Hero decoration elements */
+        .hero-gradient::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: translate(-50%, -50%);
+            border-radius: 50%;
+            z-index: 0;
+        }
+        
+        /* Ensure hero content is above decorations */
+        .hero-gradient > .content-container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Hero title styles */
+        .hero-gradient h1 {
+            @apply text-4xl md:text-5xl lg:text-6xl font-bold mb-4;
+            color: white;
+            text-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            letter-spacing: -0.03em;
+            font-weight: 800;
+            line-height: 1.25;
+        }
+        
+        /* Responsive hero title */
+        @media (max-width: 768px) {
+            .hero-gradient h1 {
+                font-size: 2.25rem;
+                line-height: 1.25;
+            }
+        }
+    
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+      
+        /* Content container */
+        .content-container {
+            @apply max-w-7xl mx-auto px-6;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .members-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            .region-section {
+                padding: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            h3 {
+                font-size: 1.5rem;
+            }
+            h4 {
+                font-size: 1.25rem;
+            }
+            h5 {
+                font-size: 1rem;
+            }
+        }
+        /* Navigation styles */
+        /* 统一导航栏链接样式 */
+            @apply transition-all duration-200;
+        
+    /* 统一导航栏链接样式 */
+
+/* 移动导航链接样式 */
+/* 统一导航栏链接样式 */
+.nav-link {
+    @apply text-gray-300 hover:text-blue-400 transition-all duration-300 font-medium relative;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #667eea, #764ba2);
+    transition: width 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link.active {
+    @apply text-blue-400;
+}
+
+.nav-link.active::after {
+    width: 100%;
+}
+
+/* 移动导航链接样式 */
+.mobile-nav-link {
+    @apply block px-3 py-2 rounded-md text-base font-medium text-gray-300 hover:text-blue-400 hover:bg-blue-600/20 transition-all duration-300;
+    font-family: 'Noto Serif SC', 'Noto Serif', serif;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    text-decoration: none;
+    line-height: 1.5;
+}
+
+.mobile-nav-link.active {
+    @apply bg-blue-600/20 text-blue-400;
+}
+/* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation Bar -->
+    <nav class="sticky top-0 z-50 bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 shadow-lg overflow-visible relative">
+        <!-- Tech Background Elements -->
+        <div class="absolute inset-0 overflow-hidden pointer-events-none">
+            <div class="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_80%,rgba(102,126,234,0.15)_0%,transparent_50%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-full bg-[linear-gradient(90deg,transparent_0%,rgba(102,126,234,0.05)_50%,transparent_100%)]"></div>
+            <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 left-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <div class="absolute top-0 right-0 w-px h-full bg-gradient-to-b from-transparent via-blue-500 to-transparent"></div>
+            <!-- Animated Grid Lines -->
+            <div class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg_width=\"100\"_height=\"100\"_viewBox=\"0_0_100_100\"_xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cpath_d=\"M11_18c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm48_25c3.866_0_7-3.134_7-7s-3.134-7-7-7-7_3.134-7_7_3.134_7_7_7zm-43-7c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm63_31c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM34_90c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zm56-76c1.657_0_3-1.343_3-3s-1.343-3-3-3-3_1.343-3_3_1.343_3_3_3zM12_86c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm28-65c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm23-11c2.76_0_5-2.24_5-5s-2.24-5-5-5-5_2.24-5_5_2.24_5_5_5zm-6 60c2.21_0_4-1.79_4-4s-1.79-4-4-4-4_1.79-4_4_1.79_4_4_4zm29 22c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zM32 63c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm57-13c2.76_0_5-2.24_5-5s-2.24-5-5-5-5 2.24-5 5 2.24_5 5 5zm-9-21c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM60 91c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM35 41c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2zM12 60c1.105_0_2-.895_2-2s-.895-2-2-2-2_.895-2_2 .895_2 2_2z"_fill="%23667eea"_fill-opacity="0.08"_fill-rule="evenodd"/%3E%3C/svg%3E') opacity-20"></div>
+        </div>
+        <div class="max-w-none mx-auto px-2 sm:px-4 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo Section -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0 flex items-center group">
+                        <div class="w-16 h-10 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-blue-500/40">
+                            <span class="text-white font-bold text-base tracking-wider">GAFSU</span>
+                        </div>
+                        <span class="ml-2 text-lg font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent hidden md:inline transition-all duration-300 group-hover:opacity-100">
+                            <span data-lang="zh">全球外国语大学联盟</span>
+                            <span data-lang="en" class="hidden">Global Alliance of Foreign Studies Universities</span>
+                        </span>
+                    </div>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden lg:flex items-center space-x-1">
+                    <!-- Search Bar -->
+                    <div class="relative mr-4">
+                        <input type="text" placeholder="搜索..." class="bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300 w-48 hover:w-64">
+                        <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                        </button>
+                    </div>
+                    
+                    <!-- Navigation Links -->
+                    <div class="flex items-center space-x-8">
+                        <!-- Chinese Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="zh">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                首页
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                关于我们
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟成员
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                联盟发展历程
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- 联盟活动下拉菜单 -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative flex items-center">
+                                    联盟活动
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                                </a>
+                                <!-- 下拉菜单内容 -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="zh"></div>
+                        
+                        <!-- English Navigation -->
+                        <div class="flex items-center space-x-8" data-lang="en">
+                            <a href="index.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Home
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="about us.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                About Us
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="联盟成员.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Member Universities
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <a href="发展历程.html" class="nav-link text-gray-300 hover:text-blue-400 transition-all duration-300 relative group">
+                                Alliance History
+                                <span class="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300 group-hover:w-full"></span>
+                            </a>
+                            <!-- Alliance Activities Dropdown -->
+                            <div class="relative group">
+                                <a href="#" class="nav-link text-blue-400 hover:text-blue-300 transition-all duration-300 relative flex items-center">
+                                    Alliance Activities
+                                    <i class="fas fa-chevron-down ml-1 text-xs transition-transform duration-300 group-hover:rotate-180"></i>
+                                    <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-blue-400 to-purple-400 transition-all duration-300"></span>
+                                </a>
+                                <!-- Dropdown Menu Content -->
+                                <div class="absolute left-0 mt-2 w-64 bg-gray-800/95 backdrop-blur-lg border border-blue-500/30 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 transform origin-top-left group-hover:scale-100 scale-95 z-50">
+                                    <ul class="py-2 space-y-1">
+                                        <li><a href="photocontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                        <li><a href="poemcontest.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                        <li><a href="CCAS.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                        <li><a href="Newsletter.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                        <li><a href="Presidentsforum.html" class="block px-5 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="h-6 w-px bg-gradient-to-b from-transparent via-blue-500/30 to-transparent" data-lang="en"></div>
+                        
+                        <!-- Language Switcher -->
+                        <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 border border-blue-500/30">
+                            <button id="langZh" class="lang-btn px-4 py-1.5 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700 hover:shadow-lg hover:shadow-blue-500/30">中文</button>
+                            <button id="langEn" class="lang-btn px-4 py-1.5 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button type="button" class="mobile-menu-button inline-flex items-center justify-center p-2 rounded-full bg-gray-800/50 backdrop-blur-sm border border-blue-500/30 text-white hover:bg-blue-600 hover:border-blue-500 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div class="lg:hidden mobile-menu hidden bg-gray-900/95 backdrop-blur-lg border-t border-blue-500/30 transition-all duration-500 relative z-10">
+            <div class="px-2 pt-4 pb-6 space-y-3 sm:px-3">
+                <!-- Search Bar -->
+                <div class="relative mb-4">
+                    <input type="text" placeholder="搜索..." class="w-full bg-gray-800/70 backdrop-blur-sm border border-blue-500/30 rounded-full px-4 py-2 pr-10 text-white placeholder-gray-400 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-300">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-blue-400 transition-colors duration-300">
+                        <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                    </button>
+                </div>
+                
+                <!-- Chinese Navigation -->
+                <div data-lang="zh">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">首页</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">关于我们</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟成员</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">联盟发展历程</a>
+                    
+                    <!-- 联盟活动移动下拉菜单 -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500 flex items-center justify-between">
+                            联盟活动
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- 下拉菜单内容 -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">摄影大赛</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">三行诗大赛</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS共同体</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">联盟通讯电子期刊</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">校长论坛</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- English Navigation -->
+                <div data-lang="en" class="hidden">
+                    <a href="index.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Home</a>
+                    <a href="about us.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">About Us</a>
+                    <a href="联盟成员.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Member Universities</a>
+                    <a href="发展历程.html" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 border-l-4 border-transparent hover:border-blue-500">Alliance History</a>
+                    
+                    <!-- Alliance Activities Mobile Dropdown -->
+                    <div class="mobile-dropdown relative">
+                        <button class="mobile-dropdown-toggle mobile-nav-link block w-full text-left px-4 py-3 rounded-lg text-base font-medium text-blue-400 bg-blue-600/20 transition-all duration-300 border-l-4 border-blue-500 flex items-center justify-between">
+                            Alliance Activities
+                            <i class="fas fa-chevron-down text-xs transition-transform duration-300"></i>
+                        </button>
+                        <!-- Dropdown Menu Content -->
+                        <div class="mobile-dropdown-menu hidden bg-gray-800/80 backdrop-blur-lg rounded-lg border border-blue-500/20 mt-1 px-3">
+                            <ul class="py-2 space-y-1">
+                                <li><a href="photocontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Photography Contest</a></li>
+                                <li><a href="poemcontest.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Tristich Contest</a></li>
+                                <li><a href="CCAS.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">CCAS Consortium</a></li>
+                                <li><a href="Newsletter.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">Alliance Newsletter</a></li>
+                                <li><a href="Presidentsforum.html" class="block px-4 py-3 text-gray-300 hover:bg-blue-600/20 hover:text-blue-400 transition-all duration-300 rounded-lg text-sm">President's Forum</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mobile Language Switcher -->
+                <div class="border-t border-blue-500/30 pt-4 mt-4">
+                    <div class="flex items-center space-x-2 bg-gray-800/50 backdrop-blur-sm rounded-full p-1 mx-3">
+                        <button id="mobileLangZh" class="lang-btn w-full px-4 py-2 rounded-full bg-blue-600 text-white font-medium shadow-sm transition-all duration-300 hover:bg-blue-700">中文</button>
+                        <button id="mobileLangEn" class="lang-btn w-full px-4 py-2 rounded-full bg-gray-800/50 text-gray-300 hover:bg-blue-600 hover:text-white transition-all duration-300">English</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="content-container">
+            <div class="max-w-4xl mx-auto">
+                <div class="mb-4 flex items-center space-x-3 text-sm opacity-90">
+                    <!-- Chinese Version -->
+                    <div data-lang="zh">
+                        <a href="index.html" class="hover:text-blue-300 transition-colors duration-200">首页</a>
+                        <span>›</span>
+                        <span>联盟活动</span>
+                        <span>›</span>
+                        <a href="CCAS.html" class="hover:text-blue-300 transition-colors duration-200">CCAS共同体</a>
+                        <span>›</span>
+                        <span>新闻详情</span>
+                    </div>
+                    <!-- English Version -->
+                    <div data-lang="en" class="hidden">
+                        <a href="index.html" class="hover:text-blue-300 transition-colors duration-200">Home</a>
+                        <span>›</span>
+                        <span>Alliance Activities</span>
+                        <span>›</span>
+                        <a href="CCAS.html" class="hover:text-blue-300 transition-colors duration-200">CCAS Consortium</a>
+                        <span>›</span>
+                        <span>News Details</span>
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight" data-lang="zh">全球区域国别学共同体启动仪式暨学科发展论坛在北外举行</h1>
+                <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight hidden" data-lang="en">Consortium for Country and Area Studies Launch Ceremony and Discipline Development Forum Held at BFSU</h1>
+                
+                <div class="flex flex-wrap items-center gap-4 text-sm opacity-90">
+                    <div class="flex items-center">
+                        <i class="far fa-calendar mr-2"></i>
+                        <span data-lang="zh">2022年04月30日</span>
+                        <span data-lang="en" class="hidden">April 30, 2022</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-user mr-2"></i>
+                        <span data-lang="zh">GAFSU秘书处</span>
+                        <span data-lang="en" class="hidden">GAFSU Secretariat</span>
+                    </div>
+                    <div class="flex items-center">
+                        <i class="far fa-eye mr-2"></i>
+                        <span>1,234</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Content Section -->
+    <section class="py-12 px-4 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="max-w-4xl mx-auto">
+                <!-- Featured Image -->
+                <div class="mb-12">
+                    <div class="relative overflow-hidden rounded-xl shadow-2xl group">
+                        <img 
+                            src="pic/CCAS/1.jpg" 
+                            alt="国际学术研讨会现场" 
+                            class="w-full h-auto object-contain"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+
+                <!-- News Content -->
+                <div class="prose prose-lg max-w-none">
+                    <div data-lang="zh">
+                        <h2 class="text-2xl font-bold mb-6 section-header">全球区域国别学共同体启动仪式暨学科发展论坛</h2>
+                                               
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">2022年4月29日，全球区域国别学共同体（Consortium for Country and Area Studies, CCAS）启动仪式暨学科发展论坛在北京外国语大学举行。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">全球区域国别学共同体（CCAS）是全球外国语大学联盟（GAFSU）发起的，由来自181个国家、覆盖100多种语言的学者，秉持“增进国际理解，共创美好未来”（Better Understanding, Better World）理念，形成的国际学者学术网络。</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">联合国教科文组织前总干事伊琳娜·博科娃，联合国系统驻华协调员常启德，上海外国语大学校长李岩松，北京大学区域与国别研究院院长钱乘旦，世界儒学文化研究联合会会长安乐哲，中国社会科学院政治研究所所长张树华、欧洲研究所所长冯仲平，全球化智库（CCG）理事长王辉耀，高校国别和区域研究人才培养与学科建设联盟学术委员主任罗林，北京大学区域与国别研究院常务副院长宁琦，复旦大学中国研究院院长张维为，北京外国语大学党委书记王定华，党委副书记、校长杨丹，党委副书记、副校长贾文键，党委常委、副校长孙有中、赵刚，学术委员会主任袁军等出席会议。摩洛哥议会议员穆罕默德·哈利里，巴哈马巡回大使吉尔伯特·莫里斯，吉尔吉斯斯坦驻华大使卡纳伊姆·巴克特古洛娃，以及来自阿尔巴尼亚、阿塞拜疆、保加利亚、柬埔寨、哥伦比亚、吉布提、萨尔瓦多、埃塞俄比亚、德国、约旦、摩尔多瓦、黑山、缅甸、斯洛伐克、俄罗斯等181个国家的政府官员、专家学者在线上参加会议。启动仪式由中国国际电视台（CGTN）主持人伊娃·梅主持。会议通过英语、法语、西班牙语、俄语、阿拉伯语、德语、葡萄牙语、日语等八个语种向与会专家学者同步直播。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">全球外国语大学联盟理事长、北外校长杨丹致欢迎词，向学术共同体成立表示热烈祝贺，向与会专家学者表示衷心感谢。他表示，进入二十一世纪以来，世界发生了复杂而深远的变化，世界各国只有通过增进相互理解，实现相互尊重，达到相互合作，才能实现持久和平与可持续发展。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">杨丹从三个方面分享了对建立全球区域国别学共同体的看法：</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">一是应对全球挑战和分享全球机遇，需要全球范围内区域国别研究学者的合作。解决当前全球面临的发展问题和治理问题，需要全球性的视野和工具。没有深入全面的地区研究和全球研究，就不可能获得理性认知，也不能实现有效协作。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;"> 二是全球区域国别学者的合作，需要打破藩篱，促进学者协作、推动学科交叉、助力学术创新。面对新现实和新挑战，我们应打破学科和地域藩篱，克服“学科孤岛”“地域孤岛”“认知孤岛”等问题，实现区域国别研究理论、方法、数据、议题的融合，形成共有的知识体系和价值观。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">三是全球区域国别学学者的合作，需要重视全球参与特别是发展中国家的贡献。共同体以倡导“多视角、全覆盖”为己任，更平衡地体现世界各国学者的观点，尤其是为发展中国家学者的研究提供支持，促进学者的平等交流，增进平等的相互认知。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">杨丹指出，语言是人类文明的本体、人类文明的载体，它能打破不同民族、不同地域、不同文化的交流隔阂，增进相互理解、促进民心相通，是区域国别学科建设发展的首要基础设施。语言学的研究，为政治学、经济学、人类学等多学科的发展打开新境界，提供了新能量。北外是中国大学中最早致力于推动国别区域跨学科研究的高校，目前教授101种外语，设立44个区域国别和中外人文交流研究中心，承办23所海外孔子学院。面向未来，北外将在“语通中外、道济天下”的大学使命指引下，立足全球语言、全球文化和全球治理三大领域，实现研究视野从“对象国”视角到“全球”视角的转换，推动区域国别研究从“广泛的国别化”向“深度的全球化”迈进，促进本国研究、国别研究、区域研究、全球研究的相互印证、贯通发展。</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">杨丹表示，学者是冷静的思考者，是知识的开发者，是不停歇的创造者，也是深刻洞察人类共有智慧和情感的合作者。希望全球区域国别学共同体能够给大家的共同事业带来新的发展空间和创造激情，共同致力于增进国际理解，共创美好未来，一起回答时代之问、世界之问、未来之问。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">伊琳娜·博科娃、李岩松、常启德、钱乘旦、张树华、张维为分别致辞。他们表示，由全球外国语大学联盟发起建立全球区域国别学共同体（CCAS）可谓恰逢其时，可以积极推动世界范围内区域国别研究领域的团结与协作，为全球学者提供学术研究和交流平台，促进相互了解，为建设可持续发展的、和平的世界打开通道。希望通过学者合作回应当今时代的需求，为世界各国面临的共同机遇和挑战提供知识和学术方案，同时也就区域国别学未来发展的路径和前景提出富有前瞻性的思考。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">随后，王定华、杨丹、安乐哲为全球区域国别学共同体（CCAS）揭牌，钱乘旦、张树华、冯仲平、王辉耀、罗林、宁琦、贾文键、孙有中、赵刚、袁军共同发布全球区域国别学共同体（CCAS）标识和愿景。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">全球区域国别学共同体标识由莫比乌斯带与共同体英文缩写CCAS组合而成。莫比乌斯带体现了世界的相融相通与人类探索的无限性。蓝色与褐色的色调，代表了天空、海洋与陆地，映衬了人类文明生生不息的发展轨迹。与共同体促进全球学者协作、学科交叉、学术创新的理念相契合，表达了“增进国际理解，共创美好未来”的愿景。</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">全球区域国别学共同体回应国家、区域和全球层面的新现实、新问题与新挑战，聚合各国区域国别学学者的知识与智慧，促进区域国别学知识体系的发展。共同体将以学科、学者、学术为核心，秉承“多视角、全覆盖、重原创、促理解”的原则，促进世界各国人民更好地相互认知，携手区域国别研究的各个领域学者共同推进全球学科交叉、促进全球学者协作、实现全球学术创新。</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;"> 启动仪式结束后，全球区域国别学学科发展论坛举行，论坛由贾文键主持。</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">安乐哲，罗林，前巴黎十大副校长、联合国教科文组织《非洲通史》（第9-11卷）国际学术委员会主席高畅，巴西国际关系学会会长、南大河联邦大学安德烈·席尔瓦，王辉耀，马来西亚国民大学马来世界与文明学院院长、国家语文出版局董事会主席阿旺·沙瑞岩，爱尔兰圣三一大学访问教授杰鲁莎·麦科马克，墨西哥国立自治大学-北外墨西哥研究中心主任诺君辉，澳大利亚格里菲斯大学教授、澳大利亚人文科学院院士马克林等学者代表发表主旨演讲。与会学者认为，全球区域国别学共同体旨在加强中国与世界各国区域国别研究学者间的对话互通、交流互鉴，增进世界各国人民间的平等相互认知。区域国别学研究是“内部融通学科”，即用一种整体和包容的思维方式进行研究。学者应肩负责任，承担角色，提出意见与方案，为全球区域国别学发展贡献知识与智慧。</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">杨丹在总结发言中表示，我们需要一种基于平等、开放和包容的人类共同体价值，来推动学术研究和交流。全球区域国别学共同体将不断促进全球学者协作，推动全球学科交叉，助力全球学术创新，着力推动领域融合、区域融合、平台融合，为解决全球发展问题，构建人类命运共同体贡献智慧和力量。</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">全球区域国别学共同体专家学者，北外职能部门与学院负责人、外国专家及留学生代表参加论坛。</p>
+                    </div>
+                    
+                    <div data-lang="en" class="hidden">
+                        <h2 class="text-l font-bold mb-6 section-header">Consortium for Country and Area Studies Launch Ceremony and Discipline Development Forum</h2>
+                                               
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">On April 29, 2022, the Launch Ceremony of the Consortium for Country and Area Studies (CCAS) and the Forum on Disciplinary Development was held at Beijing Foreign Studies University (BFSU).</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Initiated by the Global Alliance of Foreign Studies Universities (GAFSU), the Consortium for Country and Area Studies (CCAS) is an international academic network composed of scholars from 181 countries, covering more than 100 languages. Guided by the thinking of “Better Understanding, Better World,” the Consortium seeks to foster global academic collaboration and mutual understanding across regions and cultures.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">The event was attended by Irina Bokova, former Director-General of UNESCO; Siddharth Chatterjee, United Nations Resident Coordinator in China; Li Yansong, President of Shanghai International Studies University; Qian Chengdan, Director of the Institute of Area and Country Studies at Peking University; Roger T. Ames, President of the World Consortium for Confucian Studies; Zhang Shuhua, Director of the Institute of Political Science, Chinese Academy of Social Sciences (CASS); Feng Zhongping, Director of the Institute of European Studies, CASS; Wang Huiyao, President of the Center for China and Globalization (CCG); Luo Lin, Director of the Academic Committee of the Alliance for Talent Cultivation and Discipline Development in Area and Country Studies; Ning Qi, Executive Deputy Director of the Institute of Area and Country Studies at Peking University; Zhang Weiwei, Director of the China Institute at Fudan University; Wang Dinghua, Secretary of the Party Committee of BFSU; Yang Dan, President of BFSU; Jia Wenjian, Vice President of BFSU; Sun Youzhong and Zhao Gang, Vice Presidents of BFSU; and Yuan Jun, Chair of the Academic Committee of BFSU.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Also participating online were Mohamed Hallili, Member of the Moroccan Parliament; Gilbert Morris, Ambassador-at-Large of the Bahamas; Kanayim Baktygulova, Ambassador of Kyrgyzstan to China; as well as government officials, experts, and scholars from 181 countries, including Albania, Azerbaijan, Bulgaria, Cambodia, Colombia, Djibouti, El Salvador, Ethiopia, Germany, Jordan, Moldova, Montenegro, Myanmar, Slovakia, and Russia.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">The launch ceremony was hosted by Eva May, anchor of China Global Television Network (CGTN). The event was livestreamed simultaneously in eight languages—English, French, Spanish, Russian, Arabic, German, Portuguese, and Japanese.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Delivering the welcome address, Yang Dan, President of BFSU and Chair of the GAFSU Council, extended warm congratulations on the establishment of the Consortium and expressed sincere appreciation to all participating scholars. He noted that since the beginning of the 21st century, the world has undergone complex and profound changes, and that only through enhanced mutual understanding, mutual respect, and cooperation can countries achieve lasting peace and sustainable development.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Yang Dan shared his perspectives on the establishment of the Global Consortium for Country and Area Studies from three dimensions:</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">First, addressing global challenges and sharing global opportunities require collaboration among country and area studies scholars worldwide. Resolving current global development and governance issues demands global perspectives and analytical tools. Without in-depth and comprehensive regional and global studies, rational understanding and effective cooperation cannot be achieved.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Second, global collaboration among country and area studies scholars necessitates breaking down barriers, promoting academic cooperation, advancing interdisciplinary integration, and fostering academic innovation. In response to new realities and challenges, scholars must overcome disciplinary, regional, and cognitive silos, integrate theories, methodologies, data, and research agendas, and jointly construct shared knowledge systems and values.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Third, such collaboration must emphasize global participation, particularly the contributions of scholars from developing countries. Upholding the principle of “multiple perspectives and full coverage,” the Consortium seeks to more equitably represent scholarly viewpoints worldwide, support research by scholars from developing countries, promote equal academic dialogue, and enhance mutual understanding on an equal footing.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Yang Dan emphasized that language constitutes the ontology and carrier of human civilization. It bridges divides among nations, regions, and cultures, enhances mutual understanding, and promotes people-to-people connectivity. Linguistic research lays the foundational infrastructure for the development of country and area studies and opens new horizons for disciplines such as political science, economics, and anthropology.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">As one of the earliest Chinese universities committed to interdisciplinary country and area studies, BFSU currently offers instruction in 101 foreign languages, hosts 44 research centers focused on country and area studies and international cultural exchange, and operates 23 Confucius Institutes abroad. Guided by its mission of “Advancing global understanding through languages and cultures,” BFSU will continue to expand its research horizons from country-specific perspectives to a truly global outlook, promote country and area studies from “broad national differentiation” toward “deep global integration,” and strive for the integrated development of national, country, regional, and global studies.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Yang Dan concluded by noting that scholars are calm thinkers, creators of knowledge, and collaborators who deeply understand shared human wisdom and emotions. He expressed hope that the CCAS would bring renewed vitality and creative momentum to their shared endeavor, jointly advancing international understanding and building a better world, while addressing the fundamental questions of our times, of the world, and of the future.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Speeches were also delivered by Irina Bokova, Li Yansong, Siddharth Chatterjee, Qian Chengdan, Zhang Shuhua, and Zhang Weiwei, who agreed that the establishment of CCAS by GAFSU was both timely and significant. They emphasized that the Consortium would strengthen global solidarity and cooperation in country and area studies, provide a platform for scholarly research and exchange, enhance mutual understanding, and open new pathways toward a peaceful and sustainable world. They also offered forward-looking insights into the future development of the discipline.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Subsequently, Wang Dinghua, Yang Dan, and Roger T. Ames jointly unveiled the CCAS plaque, while Qian Chengdan, Zhang Shuhua, Feng Zhongping, Wang Huiyao, Luo Lin, Ning Qi, Jia Wenjian, Sun Youzhong, Zhao Gang, and Yuan Jun released the CCAS logo and vision.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">The CCAS logo combines a Möbius strip with the Consortium’s acronym. The Möbius strip symbolizes global interconnectedness and the infinite nature of human exploration. The blue and brown color palette represents the sky, oceans, and land, reflecting the continuous evolution of human civilization. The design aligns with the Consortium’s commitment to global scholarly collaboration, interdisciplinary integration, and academic innovation, embodying the vision of “Better Understanding, Better World.”</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Responding to new realities, challenges, and issues at national, regional, and global levels, CCAS integrates the knowledge and wisdom of country and area studies scholars worldwide to advance the development of the discipline. Centered on disciplines, scholars, and scholarship, and guided by the principles of “multiple perspectives, comprehensive coverage, originality, and understanding,” the Consortium aims to promote global academic collaboration, interdisciplinary integration, and innovation, and to enhance mutual understanding among peoples worldwide.</p>
+                        
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Following the launch ceremony, the Forum on the Development of Country and Area Studies was held, moderated by Jia Wenjian.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Keynote speeches were delivered by Roger T. Ames; Luo Lin; Gao Chang, former Vice President of Université Paris Nanterre and Chair of the International Academic Committee for UNESCO’s General History of Africa (Volumes IX–XI); André Silva, President of the Brazilian Association of International Relations and professor at the Federal University of Rio Grande do Sul; Wang Huiyao; Awang Sariyan, President of the Academy of Malay Studies and Civilisation at Universiti Kebangsaan Malaysia and Chair of the National Language Publishing Authority; Gerusha McCormack, Visiting Professor at Trinity College Dublin; Nuo Junhui, Director of the UNAM–BFSU Mexico Research Center; and Mark McKenna, Professor at Griffith University and Fellow of the Australian Academy of the Humanities.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Participating scholars agreed that CCAS aims to enhance dialogue, exchange, and mutual learning among country and area studies scholars in China and around the world, and to promote equal and mutual understanding among peoples. They emphasized that country and area studies constitute an “internally integrative discipline” requiring holistic and inclusive approaches, and that scholars bear the responsibility of offering insights and solutions to contribute knowledge and wisdom to global academic development.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">In his concluding remarks, Yang Dan stated that academic research and exchange must be guided by values of equality, openness, and inclusiveness rooted in a shared vision of a human community. CCAS will continue to promote global scholarly collaboration, interdisciplinary integration, and academic innovation, strengthen the integration of disciplines, regions, and platforms, and contribute intellectual resources to addressing global development challenges and building a community with a shared future for mankind.</p>
+
+                        <p class="mb-6 text-lg leading-relaxed" style="text-indent: 2em; text-align: justify;">Scholars of CCAS, leaders of BFSU’s administrative departments and academic units, as well as representatives of international faculty and students, participated in the forum.</p>
+                    </div>
+                </div>
+                
+                <!-- Article Meta -->
+                <div class="pt-8 border-t border-gray-200">
+                    <div class="flex flex-wrap items-center justify-between gap-4 text-sm text-gray-600">
+                        <div class="flex items-center gap-2">
+                            <span data-lang="zh">标签：</span>
+                            <span data-lang="en" class="hidden">Tags:</span>
+                            <a href="#" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors duration-200" data-lang="zh">联盟活动</a>
+                            <a href="#" class="px-3 py-1 bg-blue-100 text-blue-800 rounded-full hover:bg-blue-200 transition-colors duration-200 hidden" data-lang="en">Alliance Activities</a>
+                            <a href="#" class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full hover:bg-purple-200 transition-colors duration-200" data-lang="zh">CCAS共同体</a>
+                            <a href="#" class="px-3 py-1 bg-purple-100 text-purple-800 rounded-full hover:bg-purple-200 transition-colors duration-200 hidden" data-lang="en">CCAS Consortium</a>
+                            <a href="#" class="px-3 py-1 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors duration-200" data-lang="zh">语言教育</a>
+                            <a href="#" class="px-3 py-1 bg-green-100 text-green-800 rounded-full hover:bg-green-200 transition-colors duration-200 hidden" data-lang="en">Language Education</a>
+                        </div>
+                        
+                        <div class="flex items-center gap-4">
+                            <span data-lang="zh">分享：</span>
+                            <span data-lang="en" class="hidden">Share:</span>
+                            <div class="flex items-center gap-2">
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-200 hover:text-blue-800 transition-colors duration-200">
+                                    <i class="fab fa-weixin"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-200 hover:text-red-800 transition-colors duration-200">
+                                    <i class="fab fa-weibo"></i>
+                                </a>
+                                <a href="#" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center text-white hover:bg-blue-600 transition-colors duration-200">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related News -->
+                <div class="mt-16 mb-16">
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header" data-lang="zh">相关新闻</h3>
+                    <h3 class="text-2xl font-bold mb-8 text-center section-header hidden" data-lang="en">Related News</h3>
+
+                     <!-- Related News Item 2 -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        <!-- Related News Item 2 -->
+                        <a href="ccas9.html" class="block bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div class="h-48 overflow-hidden">
+                                <img 
+                                    src="pic/CCAS/9.jpg" 
+                                    alt="相关新闻2" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                            </div>
+                            <div class="p-6">
+                                <div class="text-xs text-gray-500 mb-2">2025-05-13</div>
+                                <h4 class="text-lg font-bold mb-3 line-clamp-2">
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200" data-lang="zh">北外举办全球区域国别学共同体2025年会</span>
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200 hidden" data-lang="en">CCAS 2025 Annual Conference Held at BFSU</span>
+                                </h4>
+                                <p class="text-sm text-gray-600 line-clamp-3" data-lang="zh">全球区域国别学共同体2025年会日前在北京举行。年会由北京外国语大学主办，北京外国语大学区域与全球治理高等研究院承办，北京大学区域与国别研究院协办，联合国驻华系统支持，会议主题为“面向未来的全球治理：《未来契约》与‘和合善治’”，来自40多个国家和地区的200多位知名专家学者参与。</p>
+                                <p class="text-sm text-gray-600 line-clamp-3 hidden" data-lang="en">The 2025 Annual Conference of the Consortium for Country and Area Studies (CCAS) was recently held in Beijing. The Conference was hosted by Beijing Foreign Studies University (BFSU), organized by the Academy of Area and Global Governance of BFSU, co-organized by the Institute of Area and Country Studies, Peking University, and supported by the United Nations System in China. Centered on the theme “Future-Oriented Global Governance: The Pact for the Future and ‘Harmonious Unity and Good Governance,’” the Conference brought together more than 200 renowned experts and scholars from over 40 countries and regions.</p>
+                            </div>
+                        </a>
+                        
+                        <!-- Related News Item 1 -->
+                        <a href="ccas8.html" class="block bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div class="h-48 overflow-hidden">
+                                <img 
+                                    src="pic/CCAS/8.jpg" 
+                                    alt="相关新闻1" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                            </div>
+                            <div class="p-6">
+                                <div class="text-xs text-gray-500 mb-2">2022-7-12</div>
+                                <h4 class="text-lg font-bold mb-3 line-clamp-2">
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200" data-lang="zh">重磅！全球区域国别学共同体2025年会会议通知</span>
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200 hidden" data-lang="en">CCAS Consortium 2025 Annual Conference Notification</span>
+                                </h4>
+                                <p class="text-sm text-gray-600 line-clamp-3" data-lang="zh">我们很高兴在此揭晓全球外国语大学联盟首届学生摄影比赛获奖结果，并通过微信平台向大家展示获奖作品。本次大赛主题为多彩的语言文化，旨在鼓励联盟内文化交流，促进语言多样性。</p>
+                                <p class="text-sm text-gray-600 line-clamp-3 hidden" data-lang="en">We are delighted to unveil the winners of GAPHO 2022 and show you their works of art through our WeChat platform. The theme of this year’s GAPHO is Diversified Languages and Cultures, with the aim of encouraging cultural exchanges and promoting linguistic diversity.</p>
+                            </div>
+                        </a>
+                        
+                        <!-- New Related News Item 3 -->
+                        <a href="ccas7.html" class="block bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300">
+                            <div class="h-48 overflow-hidden">
+                                <img 
+                                    src="pic/CCAS/7.jpg" 
+                                    alt="相关新闻3" 
+                                    class="w-full h-full object-cover transition-transform duration-500 hover:scale-110"
+                                />
+                            </div>
+                            <div class="p-6">
+                                <div class="text-xs text-gray-500 mb-2">2024-03-20</div>
+                                <h4 class="text-lg font-bold mb-3 line-clamp-2">
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200" data-lang="zh">全球区域国别学共同体2025年年会征稿通知</span>
+                                    <span class="text-gray-800 hover:text-indigo-600 transition-colors duration-200 hidden" data-lang="en">Call for Papers-2025 CCAS Annual Conference</span>
+                                </h4>
+                                <p class="text-sm text-gray-600 line-clamp-3" data-lang="zh">为探索推进区域国别学发展的新路径，深化学术创新与治理实践的深度融合，“全球区域国别学共同体（Consortium for Country and Area Studies，CCAS）2025年度大会”将于2025年10月17—18日在北京举行。</p>
+                                <p class="text-sm text-gray-600 line-clamp-3 hidden" data-lang="en">To explore new pathways for advancing country and area studies and deepen the integration of academic innovation with governance practice, “2025 Annual Conference of the Consortium for Country and Area Studies” will be held in Beijing on October 17–18, 2025, with the theme “Future-Oriented Global Governance: The Pact for the Future and Harmonious Unity and Good Governance”.</p>
+                            </div>
+                        </a>
+                                                
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="content-container text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile Menu Toggle
+            const mobileMenuButton = document.querySelector('.mobile-menu-button');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            
+            if (mobileMenuButton && mobileMenu) {
+                mobileMenuButton.addEventListener('click', function() {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+            
+            // Language Switching
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+                
+                // Update language button states
+                const langButtons = document.querySelectorAll('.lang-btn');
+                langButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-800/50', 'text-gray-300');
+                });
+                
+                // Highlight the active language button
+                const activeButtons = document.querySelectorAll(`#lang${lang === 'zh' ? 'Zh' : 'En'}, #mobileLang${lang === 'zh' ? 'Zh' : 'En'}`);
+                activeButtons.forEach(btn => {
+                    btn.classList.add('bg-blue-600', 'text-white');
+                    btn.classList.remove('bg-gray-800/50', 'text-gray-300');
+                });
+            }
+            
+            const langZhButtons = document.querySelectorAll('#langZh, #mobileLangZh');
+            const langEnButtons = document.querySelectorAll('#langEn, #mobileLangEn');
+            
+            langZhButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('zh'));
+            });
+            
+            langEnButtons.forEach(btn => {
+                btn.addEventListener('click', () => switchLanguage('en'));
+            });
+            
+            // Initialize with saved language or default to Chinese
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+
+    </script>
+<!-- Back to Top Button -->
+<button id="backToTop" class="fixed bottom-6 right-6 bg-indigo-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center hover:bg-indigo-700 transition-all opacity-0 invisible">
+    <i class="fas fa-arrow-up"></i>
+</button>
+
+<!-- Save scroll position functionality -->
+<script>
+
+
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+window.addEventListener('scroll', () => {
+    if (window.pageYOffset > 300) {
+        backToTopButton.classList.remove('opacity-0', 'invisible');
+        backToTopButton.classList.add('opacity-100', 'visible');
+    } else {
+        backToTopButton.classList.remove('opacity-100', 'visible');
+        backToTopButton.classList.add('opacity-0', 'invisible');
+    }
+});
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+</script>
+</body>
+</html>

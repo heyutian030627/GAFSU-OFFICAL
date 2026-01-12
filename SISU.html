@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>北京外国语大学 - GAFSU全球外国语大学联盟</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Noto Serif SC', 'Noto Serif', serif;
+        }
+        .hero-gradient {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        /* University logo circular frame */
+        .university-logo {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 5px solid white;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .university-logo:hover {
+            transform: scale(1.05);
+        }
+        /* Info card styles */
+        .info-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            padding: 2rem;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .info-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+        }
+        /* Section header styles */
+        .section-header {
+            position: relative;
+            display: inline-block;
+        }
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+        }
+        /* Back button styles */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background-color: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        .back-btn:hover {
+            background-color: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .back-btn svg {
+            margin-right: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+        .back-btn:hover svg {
+            transform: translateX(-2px);
+        }
+        
+        /* 确保移动端字体统一 */
+        @media (max-width: 768px) {
+            /* 统一所有元素的字体设置 */
+            * {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+            }
+            
+            /* 确保文本元素的字体大小和行高统一 */
+            h1, h2, h3, h4, h5, h6, p, a, span, div {
+                font-family: 'Noto Serif SC', 'Noto Serif', serif !important;
+                line-height: 1.5 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Hero Section -->
+    <section class="hero-gradient text-white py-20 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">北京外国语大学</h1>
+            <p class="text-xl opacity-90"></p>
+        </div>
+    </section>
+
+    <!-- Back Button -->
+    <section class="py-4 px-4 bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto">
+            <a href="index.html" class="back-btn">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                返回首页
+            </a>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12 px-4">
+        <div class="max-w-7xl mx-auto">
+            <!-- University Logo and Basic Info -->
+            <div class="flex flex-col items-center mb-12">
+                <img src="pic/logo/SISU.jpg" alt="北京外国语大学 Logo" class="university-logo mb-8">
+                
+                <div class="info-card w-full max-w-3xl">
+                    <!-- Chinese Version -->
+                    <div data-lang="zh">
+                        <h2 class="text-2xl font-bold mb-6 section-header">基本信息</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3"><strong>学校名称：</strong>上海外国语大学</p>
+                                <p class="mb-3"><strong>所属国家：</strong>中国</p>
+                                <p class="mb-3"><strong>所在城市：</strong>上海</p>
+                                <p class="mb-3"><strong>加入批次：</strong>创始成员</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><strong>英文名称：</strong>Shanghai International Studies University</p>
+                                <p class="mb-3"><strong>学校类型：</strong>外国语大学</p>
+                                <p class="mb-3"><strong>联盟成员状态：</strong>正式成员</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- English Version -->
+                    <div data-lang="en" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6 section-header">Basic Information</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <p class="mb-3"><strong>University Name：</strong>Shanghai International Studies University</p>
+                                <p class="mb-3"><strong>Country：</strong>China</p>
+                                <p class="mb-3"><strong>City：</strong>Shanghai</p>
+                                <p class="mb-3"><strong>Join Batch：</strong>Founding Member</p>
+                            </div>
+                            <div>
+                                <p class="mb-3"><strong>Chinese Name：</strong>上海外国语大学</p>
+                                <p class="mb-3"><strong>Type：</strong>Foreign Studies University</p>
+                                <p class="mb-3"><strong>Membership Status：</strong>Full Member</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- School Introduction -->
+            <div class="info-card mb-12">
+                <!-- Chinese Version -->
+                <div data-lang="zh">
+                    <h2 class="text-2xl font-bold mb-6 section-header">学校简介</h2>
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">上海外国语大学（Shanghai International Studies University，SISU），简称“上外”，是中华人民共和国成立后兴办的第一所高等外语学府，国家公办的全日制普通高等学校，教育部直属并与上海市共建的全国重点大学，主管部门是中华人民共和国教育部，注册地址为上海市大连西路550号。上海外国语大学是联合国合作备忘录签约高校和欧盟委员会口译总司合作单位，也是国际高校翻译学院联合会（CIUTI）成员，已开设全部联合国6种官方语文语对组合，获得国际会议口译员协会（AIIC）全球最高评级。姜椿芳、厉麟似、夏仲毅、方重、徐仲年等杰出的名家大师都曾执教于上外。
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">上海外国语大学始于1949年12月创办的华东人民革命大学附设上海俄文学校。1950年，学校更名为华东人民革命大学附设外文专修学校；1952年，更名为上海俄文专科学校；1956年，更名为上海外国语学院；1963年，列入全国重点高等学校；1994年，更名为上海外国语大学。1996年，被确定为中国“211工程”重点建设高校；2017年，入选中国“双一流”建设高校。
+                    </div>
+                    
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">截至2024年9月，上海外国语大学有虹口和松江两个校区，占地74.7公顷。学校有教学院系（部）23个，有1个国家“双一流”建设学科，56个本科专业，42个二级学科硕士学位授权点；10个硕士专业学位授权点，4个一级学科博士学位授权点，22个二级学科博士学位授权点；2个博士专业学位授权点，3个博士后科研流动站；教职工1601人，各类学生总数13741人。                    
+
+                    </div>
+                </div>
+                
+                <!-- English Version -->
+                <div data-lang="en" class="hidden">
+                    <h2 class="text-2xl font-bold mb-6 section-header">About the University</h2>
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">Shanghai International Studies University (SISU), abbreviated as “SISU” (Chinese: Shangwai), is the first institution of higher education specializing in foreign languages established after the founding of the People’s Republic of China. It is a state-run, full-time comprehensive university directly administered by the Ministry of Education and jointly supported by the Ministry of Education and the Shanghai Municipal Government. The university is located at No. 550 Dalian West Road, Shanghai.
+                    </div>
+
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">SISU is a signatory university to cooperation memoranda with the United Nations and a partner institution of the Directorate-General for Interpretation of the European Commission. It is also a member of the International Standing Conference of University Institutes of Translators and Interpreters (CIUTI). The university offers all language combinations of the six official languages of the United Nations and has received the highest global accreditation from the International Association of Conference Interpreters (AIIC). Renowned scholars and masters such as Jiang Chunfang, Li Linsi, Xia Zhongyi, Fang Zhong, and Xu Zhongnian have all taught at SISU.
+                    </div>
+
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">Shanghai International Studies University traces its origins to the Shanghai Russian Language School affiliated with the East China People’s Revolutionary University, founded in December 1949. In 1950, it was renamed the Foreign Languages Training School affiliated with the East China People’s Revolutionary University; in 1952, it became the Shanghai Russian Language College; in 1956, it was renamed Shanghai Institute of Foreign Languages; in 1963, it was designated a national key institution of higher education; and in 1994, it officially adopted its current name, Shanghai International Studies University. In 1996, SISU was selected as a key university under China’s “Project 211,” and in 2017, it was included in the national “Double First-Class” initiative.
+                    </div>
+
+                    <div class="prose prose-lg max-w-none" style="text-indent: 2em;">As of September 2024, SISU operates two campuses, Hongkou and Songjiang, covering a total area of 74.7 hectares. The university comprises 23 teaching and research units, hosts one national “Double First-Class” discipline, and offers 56 undergraduate programs. It is authorized to confer master’s degrees in 42 secondary disciplines, offers 10 professional master’s degree programs, holds authorization for 4 first-level doctoral disciplines and 22 secondary doctoral disciplines, provides 2 professional doctoral degree programs, and maintains 3 postdoctoral research stations. The university employs 1,601 faculty and staff members and enrolls a total of 13,741 students across all levels.
+                    </div>
+
+                </div>
+            </div>
+            
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <p class="text-gray-400">© 2024 全球外国语大学联盟 | Global Alliance of Foreign Studies Universities</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Language Switching Functionality
+            function switchLanguage(lang) {
+                // Save language preference to localStorage
+                localStorage.setItem('gafsuLanguage', lang);
+                
+                // Hide all elements with data-lang attribute
+                const allLangElements = document.querySelectorAll('[data-lang]');
+                allLangElements.forEach(el => {
+                    el.classList.add('hidden');
+                });
+                
+                // Show only elements with the selected language
+                const langElements = document.querySelectorAll(`[data-lang="${lang}"]`);
+                langElements.forEach(el => {
+                    el.classList.remove('hidden');
+                });
+            }
+            
+            // Check if there's a saved language preference
+            const savedLanguage = localStorage.getItem('gafsuLanguage') || 'zh';
+            switchLanguage(savedLanguage);
+        });
+    </script>
+</body>
+</html>
